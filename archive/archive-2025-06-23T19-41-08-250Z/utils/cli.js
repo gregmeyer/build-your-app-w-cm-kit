@@ -21,12 +21,15 @@ const commands = {
   'session-wrapup': require('./commands/session-wrapup'),
   'status-report': require('./commands/status-report'),
   'list-tickets': require('./commands/list-tickets'),
+  'create-ticket': require('./commands/create-ticket'),
+  'clear-tickets': require('./commands/clear-tickets'),
   'reset-project': require('./commands/reset-project'),
   'remove-demo': require('./commands/remove-demo'),
   'list-prds': require('./commands/list-prds'),
   'create-prd': require('./commands/create-prd'),
   'generate-stories': require('./commands/generate-stories'),
   'restore-docs': require('./commands/restore-docs'),
+  'archive-config': require('./commands/archive-config'),
   // ... add more commands as needed ...
 };
 
