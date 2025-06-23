@@ -3,6 +3,7 @@ import Link from 'next/link';
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/admin/demo', label: 'Demo' },
+  { href: '/admin/blank', label: 'Blank Page' },
   { href: '/docs', label: 'Documentation' }
 ];
 
@@ -30,11 +31,8 @@ export default function Navigation() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/demo">
-              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Demo Blank Page</span>
-            </Link>
             <Link href="/admin/demo">
-              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">Admin</span>
+              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Full Demo</span>
             </Link>
           </div>
         </div>

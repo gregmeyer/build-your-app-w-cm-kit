@@ -33,10 +33,16 @@ I can efficiently manage project workflow directly from the admin demo interface
 - [ ] Clicking "Status Report" displays the current project status, including tickets, issues, and test results
 - [ ] All actions provide user feedback (success, error, loading states)
 - [ ] Actions are implemented using the appropriate backend logic or CLI integration
+- [ ] Navigation provides access to both full demo and blank page example
+
+## Related
+- STORY-003: Navigation Updates
+- TICKET-003: Add Blank Page Example
 
 ## Notes
 - This story covers only the UI and workflow integration for the three quick actions on the /admin/demo page.
 - Further stories may be needed for advanced ticket management or session analytics.
+- Users can choose between comprehensive demo (/admin/demo) and simple blank page (/admin/blank) based on their needs.
 
 ---
 

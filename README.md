@@ -69,6 +69,7 @@ The CM Kit Workflow System now includes a **complete sample application** that d
 ### 📱 **Sample Pages**
 - **Clean Homepage** (`/`) - Minimal, clean landing page ready for your content
 - **Admin Demo** (`/admin/demo`) - Full workflow system showcase with stats and actions
+- **Blank Page Example** (`/admin/blank`) - Simple blank page with navigation, intentionally empty by design
 - **Documentation** (`/docs`) - Comprehensive documentation system with:
   - **CLI Reference** (`/docs/cli`) - Complete command-line interface documentation
   - **Workflow Guide** (`/docs/workflow`) - Step-by-step development processes
@@ -84,7 +85,7 @@ The CM Kit Workflow System now includes a **complete sample application** that d
 - **Button** - Multiple variants (primary, secondary, outline, ghost) and sizes
 - **Card** - Content containers with optional headers
 - **Badge** - Status indicators and labels
-- **Navigation** - Simple, clean navigation in the layout
+- **Navigation** - Simple, clean navigation with demo page options
 - **Lightbox** - Modal overlay component for displaying content in focused view
 - **Footer** - Comprehensive footer with legal links, resources, and CM Kit attribution
 
@@ -206,11 +207,12 @@ The setup is successful when:
 ✅ Archive configuration command creates proper backups
 ✅ Clean homepage renders correctly
 ✅ Admin demo page shows full workflow capabilities
+✅ Blank page example demonstrates basic layout structure
 ✅ Error pages handle errors gracefully
 ✅ Footer displays with legal links and CM Kit attribution
 ✅ Legal pages (Privacy, Security, Terms) are accessible
 ✅ No hydration mismatches or client/server rendering issues
-✅ Navigation works seamlessly
+✅ Navigation works seamlessly with both demo options
 
 ## Key Implementation Notes
 
@@ -222,10 +224,11 @@ The setup is successful when:
 6. **Archive System**: Configuration backup and restoration capabilities for project safety
 7. **UI Components**: Reusable components built with Tailwind CSS for consistent design
 8. **Clean Architecture**: Simple, clean homepage with admin demo showcasing capabilities
-9. **Legal Compliance**: Professional footer with legal pages (Privacy, Security, Terms) for compliance
-10. **CM Kit Attribution**: Automatic "Built with CM Kit" attribution linking to GitHub repository
-11. **Hydration Safe**: All components are designed to avoid hydration mismatches
-12. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
+9. **Demo Options**: Both comprehensive demo and simple blank page for different use cases
+10. **Legal Compliance**: Professional footer with legal pages (Privacy, Security, Terms) for compliance
+11. **CM Kit Attribution**: Automatic "Built with CM Kit" attribution linking to GitHub repository
+12. **Hydration Safe**: All components are designed to avoid hydration mismatches
+13. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
 
 ---
 
