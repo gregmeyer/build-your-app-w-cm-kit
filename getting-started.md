@@ -65,6 +65,42 @@ This script will automatically:
 
 **If you prefer manual setup or want to understand each step, continue with the sections below.**
 
+## 🧪 Automated Testing & CI/CD
+
+All new projects created with the CM Kit workflow system include a comprehensive automated testing infrastructure:
+
+- **Unit & Integration Tests**: Powered by **Jest** and **React Testing Library** for components, utilities, and CLI.
+- **End-to-End (E2E) Tests**: Powered by **Playwright** for user workflows, navigation, and accessibility.
+- **Test Coverage**: Jest coverage reporting is enabled by default. Aim for 70%+ coverage.
+- **CI/CD Integration**: GitHub Actions workflow runs all tests and uploads coverage on every push/PR.
+
+### Test Directory Structure
+```
+tests/
+├── unit/           # Unit tests for components, utils, CLI
+├── integration/    # Integration tests for pages, workflows
+├── e2e/            # End-to-end Playwright tests
+└── utils/          # Test helpers and utilities
+```
+
+### Running Tests
+```bash
+npm test                 # Run all unit/integration tests
+npm run test:watch       # Watch mode for Jest
+npm run test:coverage    # Run tests with coverage
+npm run test:e2e         # Run E2E tests (Playwright)
+npm run test:e2e:ui      # E2E tests with UI
+npm run test:all         # Run all tests (unit + E2E)
+npm run test:ci          # Run all tests for CI
+```
+
+- **Sample Tests**: Provided for all major components and workflows. See [tests/README.md](tests/README.md) for details.
+- **CI/CD**: `.github/workflows/ci.yml` runs all tests and uploads coverage on every push/PR.
+
+For more details, see the main [README.md](README.md).
+
+---
+
 ## Development Environment Setup
 
 ### Using Cursor (Recommended)

@@ -122,6 +122,34 @@ The CM Kit Workflow System now includes a **complete sample application** that d
 - **Error Handling** - Proper error.tsx, not-found.tsx, global-error.tsx components
 - **Hydration Safe** - No hydration mismatches or client/server rendering issues
 
+### 🧪 Automated Testing & CI/CD
+
+- **Comprehensive Testing**: All new projects include a complete automated testing infrastructure out of the box.
+- **Unit & Integration Tests**: Powered by **Jest** and **React Testing Library**. Test all components, utilities, and CLI commands.
+- **End-to-End (E2E) Tests**: Powered by **Playwright**. Test user workflows, navigation, accessibility, and cross-browser compatibility.
+- **Test Coverage**: Jest coverage reporting is enabled by default. Aim for 70%+ coverage.
+- **CI/CD Integration**: GitHub Actions workflow runs all tests (unit, integration, E2E) and uploads coverage on every push/PR.
+- **Test Directory Structure**:
+  ```
+  tests/
+  ├── unit/           # Unit tests for components, utils, CLI
+  ├── integration/    # Integration tests for pages, workflows
+  ├── e2e/            # End-to-end Playwright tests
+  └── utils/          # Test helpers and utilities
+  ```
+- **Test Commands**:
+  ```bash
+  npm test                 # Run all unit/integration tests
+  npm run test:watch       # Watch mode for Jest
+  npm run test:coverage    # Run tests with coverage
+  npm run test:e2e         # Run E2E tests (Playwright)
+  npm run test:e2e:ui      # E2E tests with UI
+  npm run test:all         # Run all tests (unit + E2E)
+  npm run test:ci          # Run all tests for CI
+  ```
+- **Sample Tests**: Provided for all major components and workflows. See [tests/README.md](tests/README.md) for details.
+- **CI/CD**: `.github/workflows/ci.yml` runs all tests and uploads coverage on every push/PR.
+
 ## Your Role
 You will act as a **Development Workflow Architect** who will:
 1. Guide the user through initializing a new project using the CM Kit workflow system
