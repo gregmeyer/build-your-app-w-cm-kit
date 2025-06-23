@@ -9,25 +9,25 @@ export default function AdminDemo() {
   const [toastMessage, setToastMessage] = useState('');
   const [toastCommand, setToastCommand] = useState('');
 
-  const showInfoToast = (message: string, command: string) => {
+  const showInfoToast = (message, command) => {
     setToastMessage(message);
     setToastCommand(command);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 5000);
   };
 
-  const copyToClipboard = (text: string) => {
+  const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
   };
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
+      <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          CM Kit Workflow System - Demo
+          CM Kit Admin Demo
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          This is a demonstration of the comprehensive development workflow system.
+          This is a demonstration of the complete development toolkit. From idea to deployment with proven workflows, powerful CLI tools, and Cursor-powered development.
         </p>
       </div>
 

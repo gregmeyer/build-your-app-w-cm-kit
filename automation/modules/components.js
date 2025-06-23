@@ -253,7 +253,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">☕ CM Kit</h3>
             <p className="text-gray-600 mb-4">
-              A comprehensive development workflow system for building scalable applications.
+              Build better apps faster with our complete development toolkit. From idea to deployment with proven workflows, powerful CLI tools, and Cursor-powered development.
             </p>
             <div className="flex space-x-4">
               <a
