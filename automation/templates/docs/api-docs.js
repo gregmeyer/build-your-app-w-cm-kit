@@ -14,8 +14,8 @@ export default function APIDocs() {
             <h3 className="text-lg font-medium text-gray-900 mb-2">Programmatic Usage</h3>
             <div className="bg-gray-50 rounded p-3">
               <code className="text-sm text-gray-800">
-                {`const { run } = require('./utils/commands/create-prd');`}<br/>
-                {`await run({ title: 'New Feature', template: 'feature' });`}
+                {`const { run } = require('./utils/commands/create-prd');
+await run({ title: 'New Feature', template: 'feature' });`}
               </code>
             </div>
           </div>
@@ -23,13 +23,13 @@ export default function APIDocs() {
             <h3 className="text-lg font-medium text-gray-900 mb-2">Custom Commands</h3>
             <div className="bg-gray-50 rounded p-3">
               <code className="text-sm text-gray-800">
-                {`// utils/commands/custom-command.js`}<br/>
-                {`module.exports = {`}<br/>
-                &nbsp;&nbsp;{`description: 'Custom command description',`}<br/>
-                &nbsp;&nbsp;{`run: async (options) => {`}<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;{`// Command implementation`}<br/>
-                &nbsp;&nbsp;{`}`}<br/>
-                {`};`}
+                {`// utils/commands/custom-command.js
+module.exports = {
+  description: 'Custom command description',
+  run: async (options) => {
+    // Command implementation
+  }
+};`}
               </code>
             </div>
           </div>
