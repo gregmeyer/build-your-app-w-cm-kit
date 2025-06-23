@@ -115,6 +115,16 @@ export default function WorkflowDocs() {
                   Document session progress and plan next steps with automatic logging
                 </p>
               </div>
+              
+              <div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Project Backup</h3>
+                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
+                  <div className="text-gray-400">$ node utils/cli.js archive-config</div>
+                </div>
+                <p className="text-sm text-gray-600 mt-2">
+                  Create configuration backups before major changes or milestones
+                </p>
+              </div>
             </div>
           </div>
         </div>

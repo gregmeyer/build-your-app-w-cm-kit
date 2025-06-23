@@ -105,3 +105,13 @@ Thumbs.db
 
 # CM Kit specific
 logs/session-complete-log-*.md
+
+# Archive directory (contains large backup files)
+archive/
+
+# CM Kit backup and temporary files
+project-backup-*.zip
+project-backup-*/
+archive-*/
+*.backup
+*.bak

@@ -1727,6 +1727,12 @@ function testSetup() {
     runCommand('node utils/cli.js help', 'Testing CLI help command', { silent: true });
   }
   
+  // Test archive-config command specifically
+  if (fs.existsSync('utils/commands/archive-config.js')) {
+    log('   📦 Testing archive-config command...', 'yellow');
+    runCommand('node utils/cli.js archive-config', 'Testing archive-config command', { silent: true });
+  }
+  
   // Test build
   runCommand('npm run build', 'Testing build process', { silent: true });
   
@@ -1779,6 +1785,7 @@ function generateNextSteps() {
   log('   ✅ Legal pages (Privacy, Security, Terms)');
   log('   ✅ Cursor configuration added');
   log('   ✅ Initial ticket and agent context created');
+  log('   ✅ Archive configuration command available');
   log('   ✅ Git repository initialized');
   
   log('\n🚀 Next Steps:', 'cyan');
@@ -1793,6 +1800,7 @@ function generateNextSteps() {
   log('\n💡 Tips:', 'cyan');
   log('   • Use Cursor AI to help implement features from your tickets');
   log('   • Run node utils/cli.js help to see all available commands');
+  log('   • Use node utils/cli.js archive-config to create project backups');
   log('   • Check the getting-started.md for detailed instructions');
   log('   • Session logs will be created automatically in the logs/ directory');
   log('   • The admin demo shows the full workflow system capabilities');
@@ -1802,6 +1810,7 @@ function generateNextSteps() {
   log('   • node utils/cli.js status-report    - Check project status');
   log('   • node utils/cli.js list-tickets     - View all tickets');
   log('   • node utils/cli.js pick-ticket      - Select next ticket to work on');
+  log('   • node utils/cli.js archive-config   - Create project configuration backup');
   log('   • npm run dev                        - Start development server');
   log('   • npm test                           - Run tests');
   

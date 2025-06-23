@@ -28,6 +28,14 @@ export default function DocsIndex() {
           <h3 className="text-lg font-semibold text-gray-900 mb-2">API Documentation</h3>
           <p className="text-gray-600">API endpoints and integration guides</p>
         </Link>
+        <div className="block p-6 bg-green-50 rounded-lg border border-green-200 shadow-sm">
+          <div className="text-3xl mb-4">📦</div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Archive System</h3>
+          <p className="text-gray-600">Project backup and configuration management</p>
+          <div className="mt-3 text-sm text-green-700">
+            <code className="bg-green-100 px-2 py-1 rounded">node utils/cli.js archive-config</code>
+          </div>
+        </div>
       </div>
 
       {/* License Information */}

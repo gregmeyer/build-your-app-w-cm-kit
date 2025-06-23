@@ -89,6 +89,11 @@ export default function CLIDocs() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Maintenance</h3>
                 <div className="space-y-3">
                   <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
+                    <div className="text-gray-400">$ node utils/cli.js archive-config</div>
+                    <div className="mt-1">📦 Create project configuration backup</div>
+                    <div className="text-gray-500 text-xs mt-1">Backs up essential files to archive/ directory</div>
+                  </div>
+                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
                     <div className="text-gray-400">$ node utils/cli.js remove-demo</div>
                     <div className="mt-1">🧹 Remove demo files and sample content</div>
                     <div className="text-gray-500 text-xs mt-1">Preserves documentation and core functionality</div>
@@ -168,6 +173,15 @@ export default function CLIDocs() {
                 <div className="text-gray-400"># Generate a markdown status report</div>
                 <div className="mt-2">$ node utils/cli.js status-report --format=&quot;markdown&quot; --output=&quot;status.md&quot;</div>
                 <div className="text-gray-500 text-xs mt-1">✅ Report generated: status.md</div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Creating Project Backup</h3>
+              <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
+                <div className="text-gray-400"># Create a backup of current project configuration</div>
+                <div className="mt-2">$ node utils/cli.js archive-config</div>
+                <div className="text-gray-500 text-xs mt-1">✅ Archive created: archive/archive-2024-01-15T10-30-00-000Z/</div>
               </div>
             </div>
           </div>

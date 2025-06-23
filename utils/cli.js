@@ -27,6 +27,7 @@ const commands = {
   'create-prd': require('./commands/create-prd'),
   'generate-stories': require('./commands/generate-stories'),
   'restore-docs': require('./commands/restore-docs'),
+  'archive-config': require('./commands/archive-config'),
   // ... add more commands as needed ...
 };
 

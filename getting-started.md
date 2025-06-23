@@ -955,7 +955,39 @@ node utils/cli.js session-wrapup
 
 # Check project status regularly
 node utils/cli.js status-report
+
+# Create project backups when needed
+node utils/cli.js archive-config
 ```
+
+### 8.4 Project Backup and Archiving
+The CM Kit system includes an archive command to create backups of your project configuration:
+
+```bash
+# Create a backup of your current project configuration
+node utils/cli.js archive-config
+
+# This will:
+# - Create a timestamped archive in the archive/ directory
+# - Include all essential project files (excluding node_modules)
+# - Generate metadata about the current project state
+# - Provide restoration instructions
+```
+
+**When to use archive-config:**
+- Before major refactoring or changes
+- After completing significant milestones
+- When you want to preserve a working state
+- Before experimenting with new features
+- As part of your regular backup strategy
+
+**Archive contents include:**
+- Source code (src/ directory)
+- Configuration files (package.json, next.config.js, etc.)
+- Documentation (docs/ directory)
+- CLI system (utils/ directory)
+- Project structure (tickets/, stories/, issues/)
+- Git information and metadata
 
 ## Troubleshooting
 
@@ -1029,6 +1061,7 @@ Your setup is successful when:
 ✅ Ticket and story listing works correctly
 ✅ Validation commands identify issues appropriately
 ✅ Session logging creates detailed markdown logs
+✅ Archive configuration command creates proper backups
 ✅ Git repository is properly initialized and connected to GitHub
 ✅ Development server starts without errors
 ✅ Build process completes successfully
