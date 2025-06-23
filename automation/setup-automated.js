@@ -403,6 +403,28 @@ export default function Badge({
   
   fs.writeFileSync('src/components/ui/Badge.tsx', badgeComponent);
   log('   ✅ Created: src/components/ui/Badge.tsx', 'green');
+
+  // Sample Hello component
+  const helloComponent = `import React from 'react';
+
+export default function Hello() {
+  return <div>Hello, Coffee Money!</div>;
+}
+`;
+  fs.writeFileSync('src/components/Hello.tsx', helloComponent);
+  log('   ✅ Created: src/components/Hello.tsx', 'green');
+
+  // Sample Hello test
+  const helloTest = `import { render, screen } from '@testing-library/react';
+import Hello from './Hello';
+
+test('renders greeting message', () => {
+  render(<Hello />);
+  expect(screen.getByText('Hello, Coffee Money!')).toBeInTheDocument();
+});
+`;
+  fs.writeFileSync('src/components/Hello.test.tsx', helloTest);
+  log('   ✅ Created: src/components/Hello.test.tsx', 'green');
   
   // Layout component - Updated to fix hydration issues
   const layout = `import type { Metadata } from 'next'

@@ -55,6 +55,14 @@ node automation/setup-automated.js
 
 The Coffee Money Workflow System now includes a **complete sample application** that demonstrates all its capabilities:
 
+### 🧪 **Sample Test Included**
+- A sample React component (`src/components/Hello.tsx`) and a corresponding test (`src/components/Hello.test.tsx`) are included out of the box.
+- Run all tests with:
+  ```bash
+  npm test
+  ```
+- This ensures your test setup works and provides a template for future tests.
+
 ### 📱 **Sample Pages**
 - **Clean Homepage** (`/`) - Minimal, clean landing page ready for your content
 - **Admin Demo** (`/admin/demo`) - Full workflow system showcase with stats and actions
