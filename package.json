@@ -13,7 +13,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

@@ -212,23 +212,27 @@ export default function CLIDocs() {
         </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-blue-900 mb-2">🔗 Related Documentation</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/docs/workflow" className="block p-3 bg-white rounded border border-blue-200 hover:border-blue-400 transition-colors">
-              <div className="font-medium text-blue-900">🔄 Workflow Guide</div>
-              <div className="text-sm text-blue-700">Development process and best practices</div>
-            </Link>
-            <Link href="/docs/api" className="block p-3 bg-white rounded border border-blue-200 hover:border-blue-400 transition-colors">
-              <div className="font-medium text-blue-900">🔌 API Documentation</div>
-              <div className="text-sm text-blue-700">Programmatic CLI usage</div>
-            </Link>
-            <Link href="/docs/components" className="block p-3 bg-white rounded border border-blue-200 hover:border-blue-400 transition-colors">
-              <div className="font-medium text-blue-900">🧩 Component Library</div>
-              <div className="text-sm text-blue-700">UI components for your app</div>
-            </Link>
+          <h2 className="text-lg font-semibold text-blue-900 mb-2">🔗 Related Resources</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h3 className="font-medium text-blue-900 mb-2">Documentation</h3>
+              <ul className="text-blue-800 space-y-1 text-sm">
+                <li>• <Link href="/docs/workflow" className="hover:underline">Workflow Guide</Link> - Complete workflow process</li>
+                <li>• <Link href="/docs/components" className="hover:underline">Component Library</Link> - UI components reference</li>
+                <li>• <Link href="/docs/api" className="hover:underline">API Documentation</Link> - Integration guides</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-blue-900 mb-2">Getting Started</h3>
+              <ul className="text-blue-800 space-y-1 text-sm">
+                <li>• <Link href="/admin/demo" className="hover:underline">Admin Demo</Link> - Interactive workflow demo</li>
+                <li>• <Link href="/docs" className="hover:underline">Documentation Index</Link> - All guides and references</li>
+                <li>• <Link href="/" className="hover:underline">Homepage</Link> - Project overview and quick start</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+} 

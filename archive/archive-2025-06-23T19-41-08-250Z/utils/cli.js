@@ -21,6 +21,8 @@ const commands = {
   'session-wrapup': require('./commands/session-wrapup'),
   'status-report': require('./commands/status-report'),
   'list-tickets': require('./commands/list-tickets'),
+  'create-ticket': require('./commands/create-ticket'),
+  'clear-tickets': require('./commands/clear-tickets'),
   'reset-project': require('./commands/reset-project'),
   'remove-demo': require('./commands/remove-demo'),
   'list-prds': require('./commands/list-prds'),
