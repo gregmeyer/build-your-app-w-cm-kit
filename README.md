@@ -223,4 +223,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Coffee Money Workflow System** - A comprehensive development workflow framework for building scalable, maintainable applications with excellent development practices. 
+**CM Kit Workflow System** - A comprehensive development workflow framework for building scalable, maintainable applications with excellent development practices. 
