@@ -14,7 +14,7 @@ To make this system actually work, you need to create the core CLI infrastructur
 
 ## 1. Main CLI Entry Point (`utils/cli.js`)
 
-```javascript filename=utils/cli.js
+```javascript
 #!/usr/bin/env node
 
 const path = require('path');
@@ -111,7 +111,7 @@ main().catch(console.error);
 
 ## 2. Logger Utility (`utils/lib/logger.js`)
 
-```javascript filename=utils/lib/logger.js
+```javascript
 const fs = require('fs');
 const path = require('path');
 
@@ -179,7 +179,7 @@ module.exports = Logger;
 
 ## 3. Session Start Command (`utils/commands/session-start.js`)
 
-```javascript filename=utils/commands/session-start.js
+```javascript
 const fs = require('fs');
 const path = require('path');
 const Logger = require('../lib/logger');
@@ -366,7 +366,7 @@ module.exports = {
 
 ## 4. Session Wrap-up Command (`utils/commands/session-wrapup.js`)
 
-```javascript filename=utils/commands/session-wrapup.js
+```javascript
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -677,7 +677,7 @@ module.exports = { run: (options, logger) => main() };
 
 ## 5. Status Report Command (`utils/commands/status-report.js`)
 
-```javascript filename=utils/commands/status-report.js
+```javascript
 const fs = require('fs');
 const path = require('path');
 
@@ -801,7 +801,7 @@ module.exports = {
 
 ## 6. List Tickets Command (`utils/commands/list-tickets.js`)
 
-```javascript filename=utils/commands/list-tickets.js
+```javascript
 const fs = require('fs');
 const path = require('path');
 
