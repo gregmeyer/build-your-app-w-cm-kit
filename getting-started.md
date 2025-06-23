@@ -4,7 +4,7 @@
 📅 2025-06-22
 
 ## Last Updated
-📅 2025-06-22
+📅 2025-06-23
 
 ---
 
@@ -46,7 +46,7 @@ cursor --version  # Should be available if installed
 
 ```bash
 # Run the automated setup script
-node docs/create-new-app/setup-automated.js
+node automation/setup-automated.js
 ```
 
 This script will automatically:
@@ -55,7 +55,7 @@ This script will automatically:
 - ✅ Install all dependencies (Next.js, TypeScript, Tailwind, etc.)
 - ✅ Extract and configure the CLI system
 - ✅ Create all configuration files
-- ✅ Set up basic Next.js app files
+- ✅ Set up basic Next.js app files with demo pages
 - ✅ Create initial ticket and agent context
 - ✅ Initialize Git repository
 - ✅ Test the setup
@@ -138,9 +138,9 @@ Cursor has an integrated terminal where you can run all CLI commands:
 # Open terminal in Cursor: View > Terminal or Ctrl+` (Cmd+` on Mac)
 
 # Run CLI commands directly in the terminal
-node utils/cli.js session-start
-node utils/cli.js status-report
-node utils/cli.js pick-ticket
+node automation/modules/cli.js session-start
+node automation/modules/cli.js status-report
+node automation/modules/cli.js pick-ticket
 ```
 
 ##### AI Assistance
@@ -294,7 +294,7 @@ rm -rf .git
 git init
 
 # Create your project structure
-mkdir -p {tickets,stories,issues,docs,utils/commands,utils/lib,logs}
+mkdir -p {tickets,stories,issues,docs,automation/{modules,core,templates/{pages,docs,legal,configs}},logs}
 
 # Create essential files
 touch docs/README.md
@@ -337,10 +337,10 @@ Use the provided utility script to automatically extract and create all CLI file
 
 ```bash
 # Run the CLI extraction script
-node docs/create-new-app/extract-cli.js
+node automation/extract-cli.js
 
 # Make the CLI executable
-chmod +x utils/cli.js
+chmod +x automation/modules/cli.js
 ```
 
 ### 3.2 Manual CLI Setup (Alternative)
@@ -348,40 +348,41 @@ If you prefer to set up manually, copy the CLI implementation from the documenta
 
 ```bash
 # Create the main CLI entry point
-cp docs/create-new-app/cli-implementation.md utils/cli.js
+cp automation/cli-implementation.md automation/modules/cli.js
 
 # Extract the CLI code from the markdown file
 # (You'll need to manually copy the JavaScript code from the markdown)
 ```
 
 ### 3.3 Create CLI Command Files
-Create the following files in `utils/commands/`:
+Create the following files in `automation/modules/`:
 
 ```bash
 # Create command files
-touch utils/commands/session-start.js
-touch utils/commands/session-wrapup.js
-touch utils/commands/status-report.js
-touch utils/commands/list-tickets.js
-touch utils/commands/list-stories.js
-touch utils/commands/list-issues.js
-touch utils/commands/pick-ticket.js
-touch utils/commands/pick-story.js
-touch utils/commands/update-ticket.js
-touch utils/commands/validate-structure.js
-touch utils/commands/test.js
-touch utils/commands/qa-test.js
+touch automation/modules/session-start.js
+touch automation/modules/session-wrapup.js
+touch automation/modules/status-report.js
+touch automation/modules/list-tickets.js
+touch automation/modules/list-stories.js
+touch automation/modules/list-issues.js
+touch automation/modules/pick-ticket.js
+touch automation/modules/pick-story.js
+touch automation/modules/update-ticket.js
+touch automation/modules/validate-structure.js
+touch automation/modules/test.js
+touch automation/modules/qa-test.js
+touch automation/modules/archive-config.js
 
 # Create logger utility
-touch utils/lib/logger.js
+touch automation/core/logger.js
 ```
 
 ### 3.4 Copy CLI Code
-Copy the JavaScript code from `docs/create-new-app/cli-implementation.md` into the appropriate files:
+Copy the JavaScript code from `automation/cli-implementation.md` into the appropriate files:
 
-- Copy the main CLI code to `utils/cli.js`
-- Copy the logger code to `utils/lib/logger.js`
-- Copy each command implementation to its respective file in `utils/commands/`
+- Copy the main CLI code to `automation/modules/cli.js`
+- Copy the logger code to `automation/core/logger.js`
+- Copy each command implementation to its respective file in `automation/modules/`
 
 ## Step 4: Configure Your Project
 
@@ -648,6 +649,7 @@ Thumbs.db
 
 # CM Kit specific
 logs/session-complete-log-*.md
+archive/
 EOF
 ```
 
@@ -699,16 +701,16 @@ git push -u origin main
 ### 6.1 Test the CLI System
 ```bash
 # Make CLI executable
-chmod +x utils/cli.js
+chmod +x automation/modules/cli.js
 
 # Test CLI help
-node utils/cli.js help
+node automation/modules/cli.js help
 
 # Test session start
-node utils/cli.js session-start
+node automation/modules/cli.js session-start
 
 # Test status report
-node utils/cli.js status-report
+node automation/modules/cli.js status-report
 ```
 
 ### 6.2 Test the Development Server
@@ -733,7 +735,7 @@ npm run build
 ### 7.1 Start a Development Session
 ```bash
 # Start your first development session
-node utils/cli.js session-start
+node automation/modules/cli.js session-start
 
 # This will validate your project setup and show readiness status
 ```
@@ -766,6 +768,7 @@ Set up the foundational Next.js application with:
 - Tailwind CSS for styling
 - ESLint and Prettier for code quality
 - Basic project structure
+- Demo pages (full demo and blank page example)
 
 ## Dependencies
 - None
@@ -777,18 +780,23 @@ Set up the foundational Next.js application with:
 - [ ] ESLint and Prettier configured
 - [ ] Basic project structure established
 - [ ] Development server starts without errors
+- [ ] Demo pages accessible and functional
+- [ ] Navigation works with both demo options
 
 ## Implementation Notes
 - Use Next.js 15 with App Router
 - Configure Tailwind CSS following official docs
 - Set up ESLint with Next.js recommended rules
 - Create basic directory structure for scalability
+- Include both comprehensive demo and blank page examples
 
 ## Testing
 - [ ] Development server starts successfully
 - [ ] TypeScript compilation works
 - [ ] Tailwind styles are applied
 - [ ] ESLint runs without errors
+- [ ] Demo pages render correctly
+- [ ] Navigation functions properly
 
 ## Notes
 This is the foundational ticket that all other tickets depend on.
@@ -835,6 +843,8 @@ Your new application built with the CM Kit workflow system. This is a Next.js-ba
 - **Testing**: Jest with React Testing Library
 - **Code Quality**: ESLint, Prettier
 - **Workflow**: CM Kit CLI system
+- **Automation**: Template-based setup system
+- **Demo Pages**: Full demo and blank page examples
 
 ## Development Environment
 - **Node.js**: v18+
@@ -847,6 +857,8 @@ Your new application built with the CM Kit workflow system. This is a Next.js-ba
 - Initial project setup completed
 - CLI system implemented
 - Basic Next.js application created
+- Demo pages added (full demo and blank page)
+- Navigation updated with demo options
 - Git repository initialized and connected to GitHub
 
 ## Next Steps
@@ -870,7 +882,7 @@ EOF
 ### 7.4 End Your First Session
 ```bash
 # End your development session
-node utils/cli.js session-wrapup
+node automation/modules/cli.js session-wrapup
 
 # This will create a session log and update your project status
 ```
@@ -880,10 +892,10 @@ node utils/cli.js session-wrapup
 ### 8.1 Pick Your Next Ticket
 ```bash
 # Pick the next ticket to work on
-node utils/cli.js pick-ticket
+node automation/modules/cli.js pick-ticket
 
 # Or list all available tickets
-node utils/cli.js list-tickets
+node automation/modules/cli.js list-tickets
 ```
 
 ### 8.2 Create User Stories
@@ -946,18 +958,18 @@ EOF
 ### 8.3 Regular Development Workflow
 ```bash
 # Start each development session
-node utils/cli.js session-start
+node automation/modules/cli.js session-start
 
 # Work on your tickets and stories...
 
 # End each development session
-node utils/cli.js session-wrapup
+node automation/modules/cli.js session-wrapup
 
 # Check project status regularly
-node utils/cli.js status-report
+node automation/modules/cli.js status-report
 
 # Create project backups when needed
-node utils/cli.js archive-config
+node automation/modules/cli.js archive-config
 ```
 
 ### 8.4 Project Backup and Archiving
@@ -965,7 +977,7 @@ The CM Kit system includes an archive command to create backups of your project 
 
 ```bash
 # Create a backup of your current project configuration
-node utils/cli.js archive-config
+node automation/modules/cli.js archive-config
 
 # This will:
 # - Create a timestamped archive in the archive/ directory
@@ -985,7 +997,7 @@ node utils/cli.js archive-config
 - Source code (src/ directory)
 - Configuration files (package.json, next.config.js, etc.)
 - Documentation (docs/ directory)
-- CLI system (utils/ directory)
+- CLI system (automation/ directory)
 - Project structure (tickets/, stories/, issues/)
 - Git information and metadata
 
@@ -996,13 +1008,13 @@ node utils/cli.js archive-config
 #### CLI Commands Not Found
 ```bash
 # Ensure CLI is executable
-chmod +x utils/cli.js
+chmod +x automation/modules/cli.js
 
 # Check file permissions
-ls -la utils/cli.js
+ls -la automation/modules/cli.js
 
 # Verify command files exist
-ls -la utils/commands/
+ls -la automation/modules/
 ```
 
 #### Node.js Version Issues
@@ -1047,7 +1059,7 @@ npm run build
 
 If you encounter issues:
 1. Check the error messages for specific details
-2. Review the file formats in `docs/create-new-app/templates.md`
+2. Review the file formats in `automation/templates/`
 3. Verify your project structure matches the expected layout
 4. Run validation commands to identify specific problems
 5. Check the session logs in the `logs/` directory
@@ -1065,6 +1077,9 @@ Your setup is successful when:
 ✅ Git repository is properly initialized and connected to GitHub
 ✅ Development server starts without errors
 ✅ Build process completes successfully
+✅ Demo pages are accessible and functional
+✅ Navigation works with both demo options
+✅ Blank page example demonstrates basic layout structure
 
 ## Next Steps
 
@@ -1078,7 +1093,7 @@ After successful setup:
 
 ## Resources
 
-- [CM Kit Workflow Documentation](docs/create-new-app/)
+- [CM Kit Workflow Documentation](docs/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
@@ -1089,5 +1104,5 @@ After successful setup:
 
 **Version**: v1  
 **Created**: 2025-06-22  
-**Last Updated**: 2025-06-22  
+**Last Updated**: 2025-06-23  
 **Status**: Ready for Use 
