@@ -132,6 +132,38 @@ The setup is successful when:
 4. **Logging**: All operations are logged for debugging and audit purposes
 5. **Session Logging**: Automatic creation of detailed markdown logs for each development session
 
+## 🗃️ Project Reset & Archiving
+
+This project includes a robust reset command that allows you to archive all generated files and restore the project to its pre-setup state.
+
+### How to Archive and Reset
+
+To archive your current project state and reset everything (tickets, stories, issues, logs, src, utils, node_modules, etc.):
+
+```bash
+node utils/cli.js reset-project
+```
+
+- You will be prompted for confirmation.
+- All generated files will be moved to a timestamped directory under `archive/`.
+- The project will be restored to its original, pre-setup state.
+
+### How to Restore Files from Archive
+
+If you need to recover files from an archive, you can manually copy them back. For example:
+
+```bash
+cp -R archive/project-backup-YYYY-MM-DDTHH-MM-SS-XXXZ/utils ./utils
+cp -R archive/project-backup-YYYY-MM-DDTHH-MM-SS-XXXZ/src ./src
+# ...and so on for other directories
+```
+
+> **Note:** There is no automated restore command. Restoration is manual to ensure you have full control over what gets restored.
+
+---
+
+This makes it safe to experiment, knowing you can always archive and reset your project!
+
 ---
 
 **Version**: v0  
