@@ -64,8 +64,8 @@ export default function WorkflowDemo() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Workflow Demo
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          See how the Coffee Money Workflow System streamlines your development process 
+        <p className="text-lg text-gray-600 mb-8">
+          See how the CM Kit Workflow System streamlines your development process 
           with CLI tools, session management, and AI integration.
         </p>
       </div>

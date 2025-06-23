@@ -1,4 +1,4 @@
-# Getting Started with Coffee Money Workflow System
+# Getting Started with CM Kit Workflow System
 
 ## Created
 📅 2025-06-22
@@ -10,7 +10,7 @@
 
 # Quick Start Guide
 
-This guide will help you get up and running with the Coffee Money workflow system for your new application. This assumes you've cloned the repository from GitHub and are ready to set up your development environment.
+This guide will help you get up and running with the CM Kit workflow system for your new application. This assumes you've cloned the repository from GitHub and are ready to set up your development environment.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ This script will automatically:
 
 ### Using Cursor (Recommended)
 
-Cursor is the recommended IDE for Coffee Money workflow projects because it provides excellent AI assistance and integrates well with the workflow system.
+Cursor is the recommended IDE for CM Kit workflow projects because it provides excellent AI assistance and integrates well with the workflow system.
 
 #### Install Cursor
 1. Download Cursor from [cursor.sh](https://cursor.sh/)
@@ -129,7 +129,7 @@ Install these extensions in Cursor for the best development experience:
 5. **Thunder Client** - API testing
 6. **Error Lens** - Inline error display
 
-#### Using Cursor with Coffee Money Workflow
+#### Using Cursor with CM Kit Workflow
 
 ##### Terminal Integration
 Cursor has an integrated terminal where you can run all CLI commands:
@@ -156,7 +156,7 @@ Cursor's AI can help you with:
 3. **Leverage AI** to help implement features from your tickets
 4. **Use Git integration** to commit changes with meaningful messages
 
-#### Cursor Shortcuts for Coffee Money Workflow
+#### Cursor Shortcuts for CM Kit Workflow
 - `Ctrl+`` (Cmd+`` on Mac): Open/close terminal
 - `Ctrl+Shift+P` (Cmd+Shift+P on Mac): Command palette
 - `Ctrl+P` (Cmd+P on Mac): Quick file open
@@ -171,9 +171,9 @@ Cursor's AI can help you with:
 - **Extension ecosystem**: Access to VS Code extensions
 - **Performance**: Fast and responsive even with large projects
 
-#### Using Cursor AI with Coffee Money Workflow
+#### Using Cursor AI with CM Kit Workflow
 
-Cursor's AI can be a powerful ally when working with the Coffee Money workflow system. Here are some effective ways to use it:
+Cursor's AI can be a powerful ally when working with the CM Kit workflow system. Here are some effective ways to use it:
 
 ##### AI Prompts for Development
 
@@ -527,7 +527,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <h1 className="text-4xl font-bold">Welcome to Your App</h1>
-        <p className="mt-4 text-lg">Built with Coffee Money Workflow System</p>
+        <p className="mt-4 text-lg">Built with CM Kit Workflow System</p>
       </div>
     </main>
   )
@@ -646,7 +646,7 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Coffee Money specific
+# CM Kit specific
 logs/session-complete-log-*.md
 EOF
 ```
@@ -657,7 +657,7 @@ EOF
 git add .
 
 # Create initial commit
-git commit -m "Initial setup with Coffee Money workflow system"
+git commit -m "Initial setup with CM Kit workflow system"
 
 # Create main branch (if not already on it)
 git branch -M main
@@ -815,7 +815,7 @@ cat > tickets/AGENT-CONTEXT.md << 'EOF'
 📅 $(date +%Y-%m-%d)
 
 ## Project Overview
-Your new application built with the Coffee Money workflow system. This is a Next.js-based application with TypeScript, Tailwind CSS, and comprehensive development tooling.
+Your new application built with the CM Kit workflow system. This is a Next.js-based application with TypeScript, Tailwind CSS, and comprehensive development tooling.
 
 ## Current Status
 - Tickets: 1 total, 0 complete, 0 in progress, 1 not started
@@ -834,7 +834,7 @@ Your new application built with the Coffee Money workflow system. This is a Next
 - **Styling**: Tailwind CSS
 - **Testing**: Jest with React Testing Library
 - **Code Quality**: ESLint, Prettier
-- **Workflow**: Coffee Money CLI system
+- **Workflow**: CM Kit CLI system
 
 ## Development Environment
 - **Node.js**: v18+
@@ -1045,7 +1045,7 @@ After successful setup:
 
 ## Resources
 
-- [Coffee Money Workflow Documentation](docs/create-new-app/)
+- [CM Kit Workflow Documentation](docs/create-new-app/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)

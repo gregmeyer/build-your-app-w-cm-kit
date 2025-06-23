@@ -42,6 +42,7 @@ node automation/setup-automated.js
 - ✅ Extracts and configures the CLI system
 - ✅ Creates all configuration files (Next.js, TypeScript, Tailwind, ESLint, Jest)
 - ✅ Sets up clean homepage with admin demo
+- ✅ Creates comprehensive documentation pages (CLI, Workflow, Components, API)
 - ✅ Creates error handling components (error.tsx, not-found.tsx, global-error.tsx)
 - ✅ Implements hydration-safe layout and components
 - ✅ Creates initial ticket and agent context
@@ -51,9 +52,11 @@ node automation/setup-automated.js
 
 **Perfect for Cursor AI workflow:** Simply ask Cursor to run this script in a new project directory, and it will set up everything automatically!
 
+> **🎯 Complete Setup:** The automated setup script creates ALL of the features listed below - the clean homepage, admin demo, documentation pages, legal pages, UI components, error handling, and more. Just run the script and you'll have a fully functional application ready for development!
+
 ## 🎨 What Comes Out of the Box
 
-The Coffee Money Workflow System now includes a **complete sample application** that demonstrates all its capabilities:
+The CM Kit Workflow System now includes a **complete sample application** that demonstrates all its capabilities:
 
 ### 🧪 **Sample Test Included**
 - A sample React component (`src/components/Hello.tsx`) and a corresponding test (`src/components/Hello.test.tsx`) are included out of the box.
@@ -66,6 +69,15 @@ The Coffee Money Workflow System now includes a **complete sample application** 
 ### 📱 **Sample Pages**
 - **Clean Homepage** (`/`) - Minimal, clean landing page ready for your content
 - **Admin Demo** (`/admin/demo`) - Full workflow system showcase with stats and actions
+- **Documentation** (`/docs`) - Comprehensive documentation system with:
+  - **CLI Reference** (`/docs/cli`) - Complete command-line interface documentation
+  - **Workflow Guide** (`/docs/workflow`) - Step-by-step development processes
+  - **Component Library** (`/docs/components`) - UI components and usage examples
+  - **API Documentation** (`/docs/api`) - API endpoints and integration guides
+- **Legal Pages** - Professional legal compliance pages:
+  - **Privacy Policy** (`/privacy`) - Comprehensive privacy policy template
+  - **Security** (`/security`) - Security practices and policies
+  - **Terms of Service** (`/terms`) - Standard terms and conditions
 - **Error Pages** - Proper error handling with user-friendly error pages
 
 ### 🧩 **UI Components**
@@ -73,6 +85,8 @@ The Coffee Money Workflow System now includes a **complete sample application** 
 - **Card** - Content containers with optional headers
 - **Badge** - Status indicators and labels
 - **Navigation** - Simple, clean navigation in the layout
+- **Lightbox** - Modal overlay component for displaying content in focused view
+- **Footer** - Comprehensive footer with legal links, resources, and CM Kit attribution
 
 ### 🛠️ **Development Tools**
 - **CLI System** - Session management, ticket listing, status reports
@@ -92,6 +106,12 @@ The Coffee Money Workflow System now includes a **complete sample application** 
   ```
   This removes the admin demo page, sample components, and test files to give you a clean slate.
 
+- **Documentation Restoration** - Restore documentation pages if accidentally removed:
+  ```bash
+  node utils/cli.js restore-docs
+  ```
+  This recreates all documentation pages (CLI, Workflow, Components, API) if they get deleted.
+
 ### 🎯 **Ready-to-Use Features**
 - **Tailwind CSS v3.4.17** - Modern styling with proper PostCSS integration
 - **TypeScript** - Full type safety and IntelliSense
@@ -103,14 +123,14 @@ The Coffee Money Workflow System now includes a **complete sample application** 
 
 ## Your Role
 You will act as a **Development Workflow Architect** who will:
-1. Guide the user through initializing a new project using the Coffee Money workflow system
+1. Guide the user through initializing a new project using the CM Kit workflow system
 2. Set up the complete development infrastructure with actual working code
 3. Create the foundational documentation and project structure
 4. Establish the workflow patterns that will be used throughout development
 
 ## File Structure
 
-This directory contains all the components needed to set up a new application using the Coffee Money workflow system:
+This directory contains all the components needed to set up a new application using the CM Kit workflow system:
 
 ### 📋 Core Documentation
 - **[README.md](README.md)** - This file: Main prompt and overview
@@ -131,9 +151,9 @@ This directory contains all the components needed to set up a new application us
 - **examples/sample-stories/** - Example user stories
 - **examples/sample-issues/** - Example bug/issue reports
 
-## Coffee Money Workflow System Overview
+## CM Kit Workflow System Overview
 
-The Coffee Money workflow system consists of **six core components** that work together to create a robust development environment:
+The CM Kit workflow system consists of **six core components** that work together to create a robust development environment:
 
 ### 1. Product Requirements Documents (PRDs)
 - **Structured product documentation** with standardized templates
@@ -186,6 +206,8 @@ The setup is successful when:
 ✅ Clean homepage renders correctly
 ✅ Admin demo page shows full workflow capabilities
 ✅ Error pages handle errors gracefully
+✅ Footer displays with legal links and CM Kit attribution
+✅ Legal pages (Privacy, Security, Terms) are accessible
 ✅ No hydration mismatches or client/server rendering issues
 ✅ Navigation works seamlessly
 
@@ -198,8 +220,10 @@ The setup is successful when:
 5. **Session Logging**: Automatic creation of detailed markdown logs for each development session
 6. **UI Components**: Reusable components built with Tailwind CSS for consistent design
 7. **Clean Architecture**: Simple, clean homepage with admin demo showcasing capabilities
-8. **Hydration Safe**: All components are designed to avoid hydration mismatches
-9. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
+8. **Legal Compliance**: Professional footer with legal pages (Privacy, Security, Terms) for compliance
+9. **CM Kit Attribution**: Automatic "Built with CM Kit" attribution linking to GitHub repository
+10. **Hydration Safe**: All components are designed to avoid hydration mismatches
+11. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
 
 ---
 
@@ -207,6 +231,72 @@ The setup is successful when:
 **Created**: 2025-06-22  
 **Last Updated**: 2025-06-23  
 **Status**: Ready for Use
+
+## 🐛 Reporting Issues
+
+If you encounter any problems or have suggestions for improvements, we'd love to hear from you! Here's how to report issues:
+
+### 📝 **Issue Reporting Guidelines**
+
+1. **Check Existing Issues**: Before creating a new issue, please check the [GitHub Issues](https://github.com/[username]/build-app-cm-kit/issues) to see if your problem has already been reported.
+
+2. **Create a GitHub Issue**: Use the GitHub Issues feature to report bugs or request features:
+   - Go to the [Issues tab](https://github.com/[username]/build-app-cm-kit/issues)
+   - Click "New Issue"
+   - Choose the appropriate issue template (Bug Report or Feature Request)
+
+3. **Issue Template**: When creating an issue, please include the following information:
+   ```markdown
+   ## 🐛 Problem Description
+   [Describe what happened and what you expected to happen]
+
+   ## 🔍 Steps to Reproduce
+   1. [Step 1]
+   2. [Step 2]
+   3. [Step 3]
+
+   ## 📋 Environment
+   - **OS**: [e.g., macOS 14.0, Windows 11, Ubuntu 22.04]
+   - **Node.js Version**: [e.g., v18.17.0]
+   - **CM Kit Version**: [e.g., v0]
+   - **Browser**: [if applicable]
+
+   ## 📸 Screenshots/Logs
+   [Include any relevant screenshots, error messages, or console logs]
+
+   ## 💡 Expected Behavior
+   [Describe what you expected to happen]
+
+   ## 🔧 Additional Context
+   [Any other information that might be helpful]
+   ```
+
+4. **CLI Issues**: If you're experiencing problems with CLI commands, please include:
+   - The exact command you ran
+   - The complete error output
+   - Your current working directory
+   - The contents of relevant configuration files
+
+5. **Labels**: Use appropriate labels when creating issues:
+   - `bug` - For bug reports
+   - `enhancement` - For feature requests
+   - `documentation` - For documentation issues
+   - `cli` - For CLI-related problems
+   - `ui` - For user interface issues
+
+### 🚀 **Getting Help**
+
+- **Documentation**: Check the [documentation pages](./docs/) for detailed guides
+- **CLI Help**: Run `node utils/cli.js help` for available commands
+- **Examples**: Review the [examples directory](./examples/) for usage patterns
+
+### 📞 **Support Channels**
+
+- **GitHub Issues**: [Create issues in the project repository](https://github.com/[username]/build-app-cm-kit/issues)
+- **Documentation**: Check `/docs` pages in the running application
+- **CLI Commands**: Use built-in help and status reporting commands
+
+---
 
 ## License
 

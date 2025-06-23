@@ -1,4 +1,8 @@
-# Coffee Money Workflow System Overview
+# CM Kit Workflow System Overview
+
+## Introduction
+
+This document provides a comprehensive overview of the CM Kit workflow system, including its components, architecture, and usage patterns.
 
 ## Created
 📅 2025-06-22
@@ -8,9 +12,9 @@
 
 ---
 
-# Coffee Money Workflow System Overview
+# CM Kit Workflow System Overview
 
-The Coffee Money workflow system consists of five core components that work together to create a robust development environment:
+The CM Kit workflow system consists of five core components that work together to create a robust development environment:
 
 ## 1. CLI Tools
 

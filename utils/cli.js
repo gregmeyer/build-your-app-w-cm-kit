@@ -26,6 +26,7 @@ const commands = {
   'list-prds': require('./commands/list-prds'),
   'create-prd': require('./commands/create-prd'),
   'generate-stories': require('./commands/generate-stories'),
+  'restore-docs': require('./commands/restore-docs'),
   // ... add more commands as needed ...
 };
 

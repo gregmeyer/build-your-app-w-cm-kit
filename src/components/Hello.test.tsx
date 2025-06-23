@@ -3,5 +3,5 @@ import Hello from './Hello';
 
 test('renders greeting message', () => {
   render(<Hello />);
-  expect(screen.getByText('Hello, Coffee Money!')).toBeInTheDocument();
+  expect(screen.getByText('Hello, CM Kit!')).toBeInTheDocument();
 }); 

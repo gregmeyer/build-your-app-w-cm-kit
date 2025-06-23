@@ -10,7 +10,7 @@
 
 # File Templates and Formats
 
-This document provides templates and format specifications for all file types used in the Coffee Money workflow system.
+This document provides templates and format specifications for all file types used in the CM Kit workflow system.
 
 ## Ticket Templates
 

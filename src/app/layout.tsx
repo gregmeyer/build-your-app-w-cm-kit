@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/ui/Footer';
 
 export const metadata: Metadata = {
-  title: 'Coffee Money Workflow System',
-  description: 'A comprehensive development workflow system for building scalable applications',
+  title: 'CM Kit Workflow System',
+  description: 'A comprehensive development workflow framework',
 }
 
 export default function RootLayout({
@@ -14,15 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen bg-gray-50">
-          <nav className="bg-white border-b border-gray-200 p-4">
-            <div className="max-w-7xl mx-auto">
-              <h1 className="text-xl font-bold text-gray-900">☕ Coffee Money</h1>
-            </div>
-          </nav>
-          <main className="max-w-7xl mx-auto px-4 py-8">
+        <div className="min-h-screen bg-gray-50 flex flex-col">
+          <Navigation />
+          <main className="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
             {children}
           </main>
+          <Footer />
         </div>
       </body>
     </html>

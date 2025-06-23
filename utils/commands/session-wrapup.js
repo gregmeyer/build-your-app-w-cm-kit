@@ -34,39 +34,32 @@ function createSessionLog() {
   const sessionNumber = existingLogs.length > 0 ? existingLogs[0] + 1 : 1;
   const filename = `${todayPrefix}-${sessionNumber.toString().padStart(2, '0')}.md`;
   const logPath = path.join(LOGS_DIR, filename);
-  const logContent = [
-    `# Coffee Money Platform - Session Complete Log`,
-    ``,
-    `## Session Information`,
-    `- **Date**: ${now.toISOString()}`,
-    `- **Session Number**: ${sessionNumber}`,
-    `- **Filename**: \`${filename}\``,
-    `- **Duration**: ${consoleOutput.length} output lines`,
-    ``,
-    `## Session Output`,
-    ``,
-    '```bash',
-    ...consoleOutput,
-    '```',
-    ``,
-    `## Session Summary`,
-    ``,
-    `### Key Metrics`,
-    `- **Session completed at**: ${now.toISOString()}`,
-    `- **Log file**: \`${filename}\``,
-    `- **Total output lines**: ${consoleOutput.length}`,
-    `- **Session number**: ${sessionNumber}`,
-    ``,
-    `### Session Status`,
-    `- ✅ Session wrap-up completed successfully`,
-    `- 📝 Log file created and saved`,
-    `- 🔄 Agent context updated`,
-    `- 🧪 Tests executed`,
-    `- 📊 Git status checked`,
-    ``,
-    `---`,
-    `*Generated automatically by Coffee Money Platform CLI*`
-  ].join('\n');
+  const logContent = `# CM Kit Platform - Session Complete Log
+
+## Session Information
+- **Session ID**: ${sessionId}
+- **Start Time**: ${startTime}
+- **End Time**: ${endTime}
+- **Duration**: ${duration}
+
+## Session Summary
+${summary}
+
+## Tasks Completed
+${tasksCompleted}
+
+## Issues Encountered
+${issuesEncountered}
+
+## Next Steps
+${nextSteps}
+
+## Technical Notes
+${technicalNotes}
+
+---
+*Generated automatically by CM Kit Platform CLI*
+`;
   fs.writeFileSync(logPath, logContent);
   console.log(`📝 Session log saved to: ${logPath}`);
   return logPath;
@@ -218,7 +211,7 @@ function generateSessionReport(stats, testSuccess, gitStatus) {
 }
 
 function main() {
-  console.log('🚀 Coffee Money Platform - Session Wrap-up');
+  console.log('🚀 CM Kit Platform - Session Wrap-up');
   console.log('='.repeat(60));
   const contextUpdated = updateAgentContext();
   const stats = getProjectStats();

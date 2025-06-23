@@ -8,7 +8,7 @@ export default function Documentation() {
       title: 'Getting Started',
       description: 'Quick setup and first steps',
       items: [
-        { title: 'Installation', description: 'Set up the Coffee Money Workflow System', status: 'Complete' },
+        { title: 'Installation', description: 'Set up the CM Kit Workflow System', status: 'Complete' },
         { title: 'CLI Setup', description: 'Configure command-line tools', status: 'Complete' },
         { title: 'First Session', description: 'Start your first development session', status: 'Ready' }
       ]
@@ -58,8 +58,8 @@ export default function Documentation() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Documentation
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Complete guide to the Coffee Money Workflow System. Learn how to use CLI tools, 
+        <p className="text-lg text-gray-600 mb-8">
+          Complete guide to the CM Kit Workflow System. Learn how to use CLI tools, 
           manage tickets, track stories, and optimize your development workflow.
         </p>
       </div>
