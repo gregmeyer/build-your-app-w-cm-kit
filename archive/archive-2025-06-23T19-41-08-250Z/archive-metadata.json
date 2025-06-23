@@ -1,0 +1,15 @@
+{
+  "archivedAt": "2025-06-23T19:41:08.293Z",
+  "archiveName": "archive-2025-06-23T19-41-08-250Z",
+  "itemsArchived": 23,
+  "totalItems": 23,
+  "gitStatus": {
+    "branch": "refactor-startup-script",
+    "commit": "efc4a70161f8ac2fdff92e7dd8860df772176f8f",
+    "hasChanges": true,
+    "changes": "D tickets/TICKET-001-nextjs-foundation.md\n D tickets/TICKET-002-admin-demo-actions.md\n M utils/cli.js\n?? archive/\n?? automation/core/\n?? automation/modules/\n?? automation/setup-modular.js\n?? automation/templates/\n?? tickets/TICKET-002-refactor-startup-script.md\n?? utils/commands/archive-config.js\n?? utils/commands/clear-tickets.js\n?? utils/commands/create-ticket.js"
+  },
+  "nodeVersion": "v23.11.0",
+  "npmVersion": "10.9.2",
+  "description": "Archive created before testing modular setup script"
+}
