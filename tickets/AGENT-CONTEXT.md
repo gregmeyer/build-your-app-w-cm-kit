@@ -23,7 +23,7 @@ Your new application built with the Coffee Money workflow system. This is a Next
 ## Implementation Context
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS v3.4.17
 - **Testing**: Jest with React Testing Library
 - **Code Quality**: ESLint, Prettier
 - **Workflow**: Coffee Money CLI system
@@ -35,10 +35,18 @@ Your new application built with the Coffee Money workflow system. This is a Next
 - **Browser**: Chrome/Firefox/Safari
 - **Terminal**: Any modern terminal
 
+## Application Structure
+- **Homepage**: Clean, minimal landing page at "/"
+- **Admin Demo**: Full workflow system showcase at "/admin/demo"
+- **Error Handling**: Proper error.tsx, not-found.tsx, global-error.tsx components
+- **Hydration**: Fixed hydration issues with simplified layout
+
 ## Recent Changes
 - Initial project setup completed via automated script
 - CLI system implemented
-- Basic Next.js application created
+- Clean homepage with admin demo created
+- Error handling components added
+- Hydration issues resolved
 - Cursor configuration added
 
 ## Next Steps
@@ -48,7 +56,7 @@ Your new application built with the Coffee Money workflow system. This is a Next
 4. Begin feature development
 
 ## Notes
-This is a fresh project setup. All systems are ready for development.
+This is a fresh project setup with a clean homepage and admin demo. All systems are ready for development with no hydration issues.
 
 ---
 

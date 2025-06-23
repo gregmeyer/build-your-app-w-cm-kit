@@ -4,7 +4,7 @@
 📅 2025-06-22
 
 ## Last Updated
-📅 2025-06-22
+📅 2025-06-23
 
 ---
 
@@ -32,22 +32,55 @@ This script automates all the steps in the getting-started guide and can be run 
 
 ```bash
 # Run the automated setup script
-node docs/create-new-app/setup-automated.js
+node automation/setup-automated.js
 ```
 
 **What the automated script does:**
 - ✅ Checks prerequisites (Node.js, npm, Git)
 - ✅ Creates complete project structure
-- ✅ Installs all dependencies (Next.js, TypeScript, Tailwind, etc.)
+- ✅ Installs all dependencies (Next.js 15, TypeScript, Tailwind CSS v3, etc.)
 - ✅ Extracts and configures the CLI system
 - ✅ Creates all configuration files (Next.js, TypeScript, Tailwind, ESLint, Jest)
-- ✅ Sets up basic Next.js app files
+- ✅ Sets up clean homepage with admin demo
+- ✅ Creates error handling components (error.tsx, not-found.tsx, global-error.tsx)
+- ✅ Implements hydration-safe layout and components
 - ✅ Creates initial ticket and agent context
 - ✅ Initializes Git repository
 - ✅ Tests the setup
 - ✅ Provides next steps and useful commands
 
 **Perfect for Cursor AI workflow:** Simply ask Cursor to run this script in a new project directory, and it will set up everything automatically!
+
+## 🎨 What Comes Out of the Box
+
+The Coffee Money Workflow System now includes a **complete sample application** that demonstrates all its capabilities:
+
+### 📱 **Sample Pages**
+- **Clean Homepage** (`/`) - Minimal, clean landing page ready for your content
+- **Admin Demo** (`/admin/demo`) - Full workflow system showcase with stats and actions
+- **Error Pages** - Proper error handling with user-friendly error pages
+
+### 🧩 **UI Components**
+- **Button** - Multiple variants (primary, secondary, outline, ghost) and sizes
+- **Card** - Content containers with optional headers
+- **Badge** - Status indicators and labels
+- **Navigation** - Simple, clean navigation in the layout
+
+### 🛠️ **Development Tools**
+- **CLI System** - Session management, ticket listing, status reports
+- **Ticket System** - Structured task management with dependencies
+- **Story Tracking** - User story and requirement management
+- **Issue Management** - Bug tracking and problem resolution
+- **Session Logging** - Automatic development session tracking
+
+### 🎯 **Ready-to-Use Features**
+- **Tailwind CSS v3.4.17** - Modern styling with proper PostCSS integration
+- **TypeScript** - Full type safety and IntelliSense
+- **Next.js 15** - Latest App Router with optimized performance
+- **ESLint & Prettier** - Code quality and formatting
+- **Jest Testing** - Unit and integration testing setup
+- **Error Handling** - Proper error.tsx, not-found.tsx, global-error.tsx components
+- **Hydration Safe** - No hydration mismatches or client/server rendering issues
 
 ## Your Role
 You will act as a **Development Workflow Architect** who will:
@@ -123,18 +156,27 @@ The setup is successful when:
 ✅ Ticket and story listing works correctly
 ✅ Validation commands identify issues appropriately
 ✅ Session logging creates detailed markdown logs
+✅ Clean homepage renders correctly
+✅ Admin demo page shows full workflow capabilities
+✅ Error pages handle errors gracefully
+✅ No hydration mismatches or client/server rendering issues
+✅ Navigation works seamlessly
 
 ## Key Implementation Notes
 
 1. **File Dependencies**: The CLI commands expect specific directory structures and file naming conventions
-2. **Error Handling**: The system includes basic error handling but may need enhancement for production use
+2. **Error Handling**: The system includes proper error handling with dedicated error components
 3. **Extensibility**: The command system is designed to be easily extended with new commands
 4. **Logging**: All operations are logged for debugging and audit purposes
 5. **Session Logging**: Automatic creation of detailed markdown logs for each development session
+6. **UI Components**: Reusable components built with Tailwind CSS for consistent design
+7. **Clean Architecture**: Simple, clean homepage with admin demo showcasing capabilities
+8. **Hydration Safe**: All components are designed to avoid hydration mismatches
+9. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
 
 ---
 
 **Version**: v0  
 **Created**: 2025-06-22  
-**Last Updated**: 2025-06-22  
+**Last Updated**: 2025-06-23  
 **Status**: Ready for Use 
