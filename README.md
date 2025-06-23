@@ -80,6 +80,11 @@ The Coffee Money Workflow System now includes a **complete sample application** 
 - **Story Tracking** - User story and requirement management
 - **Issue Management** - Bug tracking and problem resolution
 - **Session Logging** - Automatic development session tracking
+- **Demo Cleanup** - Remove sample/demo files when ready to start development:
+  ```bash
+  node utils/cli.js remove-demo
+  ```
+  This removes the admin demo page, sample components, and test files to give you a clean slate.
 
 ### 🎯 **Ready-to-Use Features**
 - **Tailwind CSS v3.4.17** - Modern styling with proper PostCSS integration
