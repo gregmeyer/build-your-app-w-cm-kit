@@ -1,4 +1,4 @@
-# Create New App Using Coffee Money System - v0
+# Create New App Using CM Kit System - v0
 
 ## Created
 📅 2025-06-22
@@ -8,9 +8,9 @@
 
 ---
 
-# LLM Prompt: Create New Application Using Coffee Money Workflow System
+# LLM Prompt: Create New Application Using CM Kit Workflow System
 
-You are an expert software architect and development workflow specialist. Your task is to help create a brand new application using the proven Coffee Money Platform workflow system. This system has been battle-tested and provides a comprehensive framework for building scalable, maintainable applications with excellent development practices.
+You are an expert software architect and development workflow specialist. Your task is to help create a brand new application using the CM Kit workflow system. This node.js-based system is intended for use by people who want to prototype applications quickly using an AI coding assistant like Cursor. The goal is to create a framework for scalable, maintainable applications with excellent development practices.
 
 ## 🚀 Getting Started
 
@@ -76,6 +76,12 @@ The Coffee Money Workflow System now includes a **complete sample application** 
 
 ### 🛠️ **Development Tools**
 - **CLI System** - Session management, ticket listing, status reports
+- **PRD System** - Product Requirements Documents with story generation:
+  ```bash
+  node utils/cli.js create-prd "Feature Name"    # Create new PRD
+  node utils/cli.js list-prds                    # List all PRDs
+  node utils/cli.js generate-stories [prd-id]    # Generate stories from PRD
+  ```
 - **Ticket System** - Structured task management with dependencies
 - **Story Tracking** - User story and requirement management
 - **Issue Management** - Bug tracking and problem resolution
@@ -127,34 +133,42 @@ This directory contains all the components needed to set up a new application us
 
 ## Coffee Money Workflow System Overview
 
-The Coffee Money workflow system consists of five core components that work together to create a robust development environment:
+The Coffee Money workflow system consists of **six core components** that work together to create a robust development environment:
 
-### 1. CLI Tools
+### 1. Product Requirements Documents (PRDs)
+- **Structured product documentation** with standardized templates
+- **User story generation** from PRDs to tickets
+- **Requirements tracking** with clear acceptance criteria
+- **Status management** from draft to completion
+- **CLI integration** for creating, listing, and managing PRDs
+- **Template system** for consistent documentation
+
+### 2. CLI Tools
 - Automated project management and validation
 - Session management (start/end development sessions)
 - Real-time status reporting and project health checks
 - Extensible command system for custom workflows
 - **Automatic session logging and audit trails**
 
-### 2. Ticket System
+### 3. Ticket System
 - Development task management with clear lifecycle
 - Dependency tracking to ensure proper development order
 - Priority management and critical path identification
 - Structured format for consistent task documentation
 
-### 3. Story System
+### 4. Story System
 - User story and requirement tracking
 - Acceptance criteria and definition of done
 - Story point estimation and priority management
 - Categorized organization (Foundation, File Management, Payment, Processing, etc.)
 
-### 4. Issue Management
+### 5. Issue Management
 - Bug tracking and problem resolution
 - Root cause analysis and prevention measures
 - Structured issue lifecycle from identification to resolution
 - Impact assessment and priority management
 
-### 5. Agent Context System
+### 6. Agent Context System
 - AI assistant guidance and project status
 - Comprehensive project information for efficient development
 - Implementation context and technical patterns
@@ -192,4 +206,21 @@ The setup is successful when:
 **Version**: v0  
 **Created**: 2025-06-22  
 **Last Updated**: 2025-06-23  
-**Status**: Ready for Use 
+**Status**: Ready for Use
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+**MIT License Summary:**
+- ✅ **Commercial Use**: Can be used in commercial/paid applications
+- ✅ **Modification**: Can modify and adapt the code
+- ✅ **Distribution**: Can distribute the code (original or modified)
+- ✅ **Private Use**: Can use in private/proprietary projects
+- ✅ **Sublicensing**: Can license it under different terms
+
+**Requirement:** The original MIT License and copyright notice must be included in any substantial portions of the software that are used.
+
+---
+
+**Coffee Money Workflow System** - A comprehensive development workflow framework for building scalable, maintainable applications with excellent development practices. 

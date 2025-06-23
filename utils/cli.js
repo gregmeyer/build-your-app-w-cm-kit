@@ -23,6 +23,9 @@ const commands = {
   'list-tickets': require('./commands/list-tickets'),
   'reset-project': require('./commands/reset-project'),
   'remove-demo': require('./commands/remove-demo'),
+  'list-prds': require('./commands/list-prds'),
+  'create-prd': require('./commands/create-prd'),
+  'generate-stories': require('./commands/generate-stories'),
   // ... add more commands as needed ...
 };
 
