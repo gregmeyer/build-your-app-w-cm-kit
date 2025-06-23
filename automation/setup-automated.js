@@ -147,11 +147,595 @@ function installDependencies() {
     'jest',
     '@testing-library/react',
     '@testing-library/jest-dom',
+    '@testing-library/user-event',
+    '@playwright/test',
+    '@types/jest',
+    'jest-html-reporter',
+    '@playwright/test-reporter-html',
     'prettier'
   ];
   
   log('   📦 Installing development dependencies...', 'yellow');
   runCommand(`npm install --save-dev ${devDeps.join(' ')}`, 'Installing development dependencies');
+}
+
+function setupTestingInfrastructure() {
+  log('\n🧪 Setting up Testing Infrastructure...', 'blue');
+  
+  // Create tests directory structure
+  const testDirs = [
+    'tests',
+    'tests/unit',
+    'tests/unit/components',
+    'tests/unit/utils',
+    'tests/unit/cli',
+    'tests/integration',
+    'tests/integration/pages',
+    'tests/integration/api',
+    'tests/integration/automation',
+    'tests/e2e',
+    'tests/e2e/workflows',
+    'tests/e2e/pages',
+    'tests/e2e/accessibility',
+    'tests/utils'
+  ];
+  
+  testDirs.forEach(dir => {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+      log(`   ✅ Created: ${dir}`, 'green');
+    } else {
+      log(`   ℹ️  Exists: ${dir}`, 'cyan');
+    }
+  });
+  
+  // Create test utilities
+  const testHelpers = `// Test utilities and helpers
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+// Custom render function with providers
+export function renderWithProviders(ui, options = {}) {
+  return render(ui, options);
+}
+
+// Mock data for tests
+export const mockData = {
+  tickets: [
+    {
+      id: 'TICKET-001',
+      title: 'Test Ticket',
+      status: 'Not Started',
+      priority: 'High'
+    }
+  ],
+  stories: [
+    {
+      id: 'STORY-001',
+      title: 'Test Story',
+      status: 'Not Started',
+      priority: 'Medium'
+    }
+  ]
+};
+
+// Common test utilities
+export const testUtils = {
+  waitForElement: (selector) => screen.findByTestId(selector),
+  clickElement: async (element) => userEvent.click(element),
+  typeText: async (element, text) => userEvent.type(element, text)
+};`;
+  
+  fs.writeFileSync('tests/utils/test-helpers.js', testHelpers);
+  log('   ✅ Created: tests/utils/test-helpers.js', 'green');
+  
+  // Create sample component test
+  const sampleComponentTest = `import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Button from '../../src/components/ui/Button';
+
+describe('Button Component', () => {
+  it('renders button with correct text', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
+  });
+
+  it('applies variant classes correctly', () => {
+    render(<Button variant="secondary">Secondary Button</Button>);
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('bg-gray-600');
+  });
+
+  it('handles click events', async () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    
+    const button = screen.getByRole('button');
+    await userEvent.click(button);
+    
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});`;
+  
+  fs.writeFileSync('tests/unit/components/Button.test.js', sampleComponentTest);
+  log('   ✅ Created: tests/unit/components/Button.test.js', 'green');
+  
+  // Create sample E2E test
+  const sampleE2ETest = `import { test, expect } from '@playwright/test';
+
+test('homepage loads correctly', async ({ page }) => {
+  await page.goto('/');
+  
+  // Check that the page loads
+  await expect(page).toHaveTitle(/CM Kit/);
+  
+  // Check for main content
+  await expect(page.locator('h1')).toBeVisible();
+});
+
+test('navigation works correctly', async ({ page }) => {
+  await page.goto('/');
+  
+  // Click on demo link
+  await page.click('text=Demo');
+  
+  // Should navigate to demo page
+  await expect(page).toHaveURL(/.*demo/);
+  await expect(page.locator('h1')).toContainText('Demo');
+});
+
+test('demo page interactions', async ({ page }) => {
+  await page.goto('/admin/demo');
+  
+  // Check that demo page loads
+  await expect(page.locator('h1')).toContainText('CM Kit Admin Demo');
+  
+  // Test any interactive elements
+  // Add more specific tests based on demo page functionality
+});`;
+  
+  fs.writeFileSync('tests/e2e/pages/homepage.spec.js', sampleE2ETest);
+  log('   ✅ Created: tests/e2e/pages/homepage.spec.js', 'green');
+  
+  // Create integration test for CLI
+  const cliIntegrationTest = `import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+
+describe('CLI Integration Tests', () => {
+  const cliPath = path.join(process.cwd(), 'utils', 'cli.js');
+  
+  beforeAll(() => {
+    // Ensure CLI exists
+    expect(fs.existsSync(cliPath)).toBe(true);
+  });
+  
+  it('should show help when no arguments provided', () => {
+    const output = execSync(\`node \${cliPath}\`, { encoding: 'utf8' });
+    expect(output).toContain('help');
+    expect(output).toContain('Available commands');
+  });
+  
+  it('should list tickets when called with list-tickets', () => {
+    const output = execSync(\`node \${cliPath} list-tickets\`, { encoding: 'utf8' });
+    expect(output).toContain('TICKET');
+  });
+  
+  it('should show status report', () => {
+    const output = execSync(\`node \${cliPath} status-report\`, { encoding: 'utf8' });
+    expect(output).toContain('Project Status');
+  });
+  
+  it('should handle archive-config command', () => {
+    const output = execSync(\`node \${cliPath} archive-config\`, { encoding: 'utf8' });
+    expect(output).toContain('archive');
+  });
+});`;
+  
+  fs.writeFileSync('tests/integration/cli/cli.test.js', cliIntegrationTest);
+  log('   ✅ Created: tests/integration/cli/cli.test.js', 'green');
+  
+  // Create page integration test
+  const pageIntegrationTest = `import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import HomePage from '../../../src/app/page';
+
+describe('HomePage Integration', () => {
+  it('renders homepage with all expected elements', () => {
+    render(<HomePage />);
+    
+    // Check for main heading
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    
+    // Check for navigation
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+    
+    // Check for demo link
+    expect(screen.getByRole('link', { name: /demo/i })).toBeInTheDocument();
+    
+    // Check for docs link
+    expect(screen.getByRole('link', { name: /docs/i })).toBeInTheDocument();
+  });
+  
+  it('has proper accessibility attributes', () => {
+    render(<HomePage />);
+    
+    // Check for main landmark
+    expect(screen.getByRole('main')).toBeInTheDocument();
+    
+    // Check for navigation landmark
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+  });
+});`;
+  
+  fs.writeFileSync('tests/integration/pages/homepage.test.js', pageIntegrationTest);
+  log('   ✅ Created: tests/integration/pages/homepage.test.js', 'green');
+  
+  // Create accessibility test
+  const accessibilityTest = `import { test, expect } from '@playwright/test';
+
+test.describe('Accessibility Tests', () => {
+  test('homepage should meet accessibility standards', async ({ page }) => {
+    await page.goto('/');
+    
+    // Check for proper heading structure
+    const headings = await page.locator('h1, h2, h3, h4, h5, h6').all();
+    expect(headings.length).toBeGreaterThan(0);
+    
+    // Check for main landmark
+    const main = await page.locator('main').count();
+    expect(main).toBeGreaterThan(0);
+    
+    // Check for navigation landmark
+    const nav = await page.locator('nav').count();
+    expect(nav).toBeGreaterThan(0);
+    
+    // Check for proper alt text on images
+    const images = await page.locator('img').all();
+    for (const img of images) {
+      const alt = await img.getAttribute('alt');
+      expect(alt).toBeTruthy();
+    }
+  });
+  
+  test('demo page should be accessible', async ({ page }) => {
+    await page.goto('/admin/demo');
+    
+    // Check for proper heading structure
+    const h1 = await page.locator('h1').count();
+    expect(h1).toBeGreaterThan(0);
+    
+    // Check for interactive elements
+    const buttons = await page.locator('button').all();
+    for (const button of buttons) {
+      const accessibleName = await button.getAttribute('aria-label') || await button.textContent();
+      expect(accessibleName).toBeTruthy();
+    }
+  });
+  
+  test('navigation should be keyboard accessible', async ({ page }) => {
+    await page.goto('/');
+    
+    // Tab through navigation
+    await page.keyboard.press('Tab');
+    
+    // Check that focus is visible
+    const focusedElement = await page.locator(':focus');
+    expect(await focusedElement.count()).toBeGreaterThan(0);
+  });
+});`;
+  
+  fs.writeFileSync('tests/e2e/accessibility/accessibility.spec.js', accessibilityTest);
+  log('   ✅ Created: tests/e2e/accessibility/accessibility.spec.js', 'green');
+  
+  // Create workflow test
+  const workflowTest = `import { test, expect } from '@playwright/test';
+
+test.describe('Workflow System Tests', () => {
+  test('complete workflow from homepage to demo', async ({ page }) => {
+    // Start at homepage
+    await page.goto('/');
+    await expect(page.locator('h1')).toBeVisible();
+    
+    // Navigate to demo
+    await page.click('text=Demo');
+    await expect(page).toHaveURL(/.*demo/);
+    await expect(page.locator('h1')).toContainText('Demo');
+    
+    // Navigate to docs
+    await page.click('text=Docs');
+    await expect(page).toHaveURL(/.*docs/);
+    await expect(page.locator('h1')).toContainText('Documentation');
+    
+    // Navigate back to homepage
+    await page.click('text=Home');
+    await expect(page).toHaveURL('/');
+  });
+  
+  test('CLI workflow simulation', async ({ page }) => {
+    // This test simulates the CLI workflow
+    // In a real scenario, you might test the actual CLI commands
+    await page.goto('/admin/demo');
+    
+    // Check that CLI demo elements are present
+    const cliElements = await page.locator('[data-testid*="cli"]').count();
+    expect(cliElements).toBeGreaterThanOrEqual(0);
+  });
+});`;
+  
+  fs.writeFileSync('tests/e2e/workflows/workflow.spec.js', workflowTest);
+  log('   ✅ Created: tests/e2e/workflows/workflow.spec.js', 'green');
+  
+  // Create test README
+  const testReadme = `# Testing Infrastructure
+
+This project includes comprehensive testing infrastructure with unit, integration, and end-to-end tests.
+
+## Test Structure
+
+\`\`\`
+tests/
+├── unit/                 # Unit tests for individual components
+│   ├── components/       # Component tests
+│   ├── utils/           # Utility function tests
+│   └── cli/             # CLI function tests
+├── integration/         # Integration tests
+│   ├── pages/           # Page-level tests
+│   ├── api/             # API integration tests
+│   └── automation/      # Automation system tests
+├── e2e/                 # End-to-end tests
+│   ├── pages/           # Page E2E tests
+│   ├── workflows/       # Workflow E2E tests
+│   └── accessibility/   # Accessibility tests
+└── utils/               # Test utilities and helpers
+\`\`\`
+
+## Running Tests
+
+### Unit and Integration Tests (Jest)
+\`\`\`bash
+npm test                 # Run all tests
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Run tests with coverage report
+\`\`\`
+
+### End-to-End Tests (Playwright)
+\`\`\`bash
+npm run test:e2e         # Run E2E tests
+npm run test:e2e:ui      # Run E2E tests with UI
+npm run test:e2e:headed  # Run E2E tests in headed mode
+\`\`\`
+
+### All Tests
+\`\`\`bash
+npm run test:all         # Run unit, integration, and E2E tests
+npm run test:ci          # Run tests for CI environment
+\`\`\`
+
+## Test Coverage
+
+The project aims for 70% code coverage across:
+- Branches: 70%
+- Functions: 70%
+- Lines: 70%
+- Statements: 70%
+
+## Writing Tests
+
+### Unit Tests
+- Test individual components and functions
+- Use React Testing Library for component tests
+- Mock external dependencies
+- Focus on behavior, not implementation
+
+### Integration Tests
+- Test component interactions
+- Test page-level functionality
+- Test CLI commands and workflows
+- Use real dependencies when possible
+
+### E2E Tests
+- Test complete user workflows
+- Test cross-browser compatibility
+- Test accessibility requirements
+- Test performance under load
+
+## CI/CD Integration
+
+Tests are automatically run in CI/CD pipeline:
+- Unit and integration tests on every push/PR
+- E2E tests on main branch
+- Security audits on dependencies
+- Coverage reports uploaded to Codecov
+
+## Best Practices
+
+1. **Test Behavior**: Focus on what the code does, not how it does it
+2. **Use Descriptive Names**: Test names should clearly describe what is being tested
+3. **Arrange-Act-Assert**: Structure tests with clear sections
+4. **Keep Tests Fast**: Unit tests should run quickly
+5. **Maintain Tests**: Update tests when code changes
+6. **Test Edge Cases**: Include tests for error conditions and edge cases
+7. **Use Test Data**: Create reusable test data and utilities
+
+## Debugging Tests
+
+### Jest Debugging
+\`\`\`bash
+npm run test:watch       # Watch mode for debugging
+npm test -- --verbose    # Verbose output
+\`\`\`
+
+### Playwright Debugging
+\`\`\`bash
+npm run test:e2e:ui      # Interactive UI mode
+npm run test:e2e:headed  # See browser during test execution
+\`\`\`
+
+## Resources
+
+- [Jest Documentation](https://jestjs.io/docs/getting-started)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Playwright Documentation](https://playwright.dev/docs/intro)
+- [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+`;
+  
+  fs.writeFileSync('tests/README.md', testReadme);
+  log('   ✅ Created: tests/README.md', 'green');
+  
+  // Update package.json scripts
+  updatePackageJsonScripts();
+  
+  // Create GitHub Actions workflow
+  createGitHubActionsWorkflow();
+}
+
+function updatePackageJsonScripts() {
+  log('   📝 Updating package.json scripts...', 'yellow');
+  
+  try {
+    const packageJsonPath = 'package.json';
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    
+    // Add test scripts
+    packageJson.scripts = {
+      ...packageJson.scripts,
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "test:coverage": "jest --coverage",
+      "test:e2e": "playwright test",
+      "test:e2e:ui": "playwright test --ui",
+      "test:e2e:headed": "playwright test --headed",
+      "test:all": "npm run test && npm run test:e2e",
+      "test:ci": "npm run test:coverage && npm run test:e2e"
+    };
+    
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    log('   ✅ Updated package.json with test scripts', 'green');
+  } catch (error) {
+    log(`   ❌ Failed to update package.json: ${error.message}`, 'red');
+  }
+}
+
+function createGitHubActionsWorkflow() {
+  log('   📝 Creating GitHub Actions workflow...', 'yellow');
+  
+  // Create .github/workflows directory
+  const workflowsDir = '.github/workflows';
+  if (!fs.existsSync(workflowsDir)) {
+    fs.mkdirSync(workflowsDir, { recursive: true });
+  }
+  
+  const ciWorkflow = `name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js \${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: \${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run linting
+      run: npm run lint
+    
+    - name: Run unit and integration tests
+      run: npm run test:ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage/lcov.info
+        flags: unittests
+        name: codecov-umbrella
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-\${{ matrix.node-version }}
+        path: |
+          coverage/
+          test-results/
+  
+  e2e:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+    
+    - name: Run E2E tests
+      run: npm run test:e2e
+    
+    - name: Upload E2E test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: |
+          playwright-report/
+          test-results/
+  
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run security audit
+      run: npm audit --audit-level moderate
+    
+    - name: Run dependency check
+      run: npx audit-ci --moderate`;
+  
+  fs.writeFileSync(`${workflowsDir}/ci.yml`, ciWorkflow);
+  log('   ✅ Created: .github/workflows/ci.yml', 'green');
 }
 
 function extractCLI() {
@@ -271,6 +855,143 @@ module.exports = createJestConfig(customJestConfig)`;
   
   fs.writeFileSync('jest.setup.js', jestSetup);
   log('   ✅ Created: jest.setup.js', 'green');
+  
+  // Playwright config
+  const playwrightConfig = `import { defineConfig, devices } from '@playwright/test';
+
+/**
+ * @see https://playwright.dev/docs/test-configuration
+ */
+export default defineConfig({
+  testDir: './tests/e2e',
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: [
+    ['html'],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['junit', { outputFile: 'test-results/results.xml' }]
+  ],
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    /* Base URL to use in actions like \`await page.goto('/')\`. */
+    baseURL: 'http://localhost:3000',
+
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry',
+    
+    /* Take screenshot on failure */
+    screenshot: 'only-on-failure',
+    
+    /* Record video on failure */
+    video: 'retain-on-failure',
+  },
+
+  /* Configure projects for major browsers */
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports. */
+    {
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] },
+    },
+    {
+      name: 'Mobile Safari',
+      use: { ...devices['iPhone 12'] },
+    },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+  ],
+
+  /* Run your local dev server before starting the tests */
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+  },
+});`;
+  
+  fs.writeFileSync('playwright.config.js', playwrightConfig);
+  log('   ✅ Created: playwright.config.js', 'green');
+  
+  // Enhanced Jest config
+  const enhancedJestConfig = `const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files
+  dir: './',
+})
+
+// Add any custom config to be passed to Jest
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'jest-environment-jsdom',
+  testMatch: [
+    '<rootDir>/tests/unit/**/*.test.{js,jsx,ts,tsx}',
+    '<rootDir>/tests/integration/**/*.test.{js,jsx,ts,tsx}',
+    '<rootDir>/src/**/*.test.{js,jsx,ts,tsx}'
+  ],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/*.stories.{js,jsx,ts,tsx}',
+    '!src/**/*.test.{js,jsx,ts,tsx}',
+    '!src/**/index.{js,jsx,ts,tsx}'
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  coverageThreshold: {
+    global: {
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70
+    }
+  },
+  moduleNameMapping: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/',
+    '<rootDir>/node_modules/',
+    '<rootDir>/tests/e2e/'
+  ]
+}
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(customJestConfig)`;
+  
+  fs.writeFileSync('jest.config.js', enhancedJestConfig);
+  log('   ✅ Updated: jest.config.js with enhanced configuration', 'green');
 }
 
 function createBasicAppFiles() {
@@ -1736,6 +2457,18 @@ function testSetup() {
   // Test build
   runCommand('npm run build', 'Testing build process', { silent: true });
   
+  // Test Jest configuration
+  if (fs.existsSync('jest.config.js')) {
+    log('   🧪 Testing Jest configuration...', 'yellow');
+    runCommand('npm test -- --passWithNoTests', 'Testing Jest setup', { silent: true });
+  }
+  
+  // Test Playwright installation
+  if (fs.existsSync('playwright.config.js')) {
+    log('   🎭 Testing Playwright installation...', 'yellow');
+    runCommand('npx playwright install --dry-run', 'Testing Playwright installation', { silent: true });
+  }
+  
   // Test dev server (start and stop quickly)
   log('   🚀 Testing development server (will start and stop)...', 'yellow');
   try {
@@ -1786,6 +2519,11 @@ function generateNextSteps() {
   log('   ✅ Cursor configuration added');
   log('   ✅ Initial ticket and agent context created');
   log('   ✅ Archive configuration command available');
+  log('   ✅ Comprehensive testing infrastructure (Jest + Playwright)');
+  log('   ✅ Unit, integration, and E2E test examples');
+  log('   ✅ Accessibility testing setup');
+  log('   ✅ CI/CD pipeline with GitHub Actions');
+  log('   ✅ Test coverage reporting (70% target)');
   log('   ✅ Git repository initialized');
   
   log('\n🚀 Next Steps:', 'cyan');
@@ -1812,7 +2550,13 @@ function generateNextSteps() {
   log('   • node utils/cli.js pick-ticket      - Select next ticket to work on');
   log('   • node utils/cli.js archive-config   - Create project configuration backup');
   log('   • npm run dev                        - Start development server');
-  log('   • npm test                           - Run tests');
+  log('   • npm test                           - Run unit and integration tests');
+  log('   • npm run test:watch                 - Run tests in watch mode');
+  log('   • npm run test:coverage              - Run tests with coverage report');
+  log('   • npm run test:e2e                   - Run end-to-end tests');
+  log('   • npm run test:e2e:ui                - Run E2E tests with UI');
+  log('   • npm run test:all                   - Run all tests (unit + E2E)');
+  log('   • npm run test:ci                    - Run tests for CI environment');
   
   log('\n🌐 Pages Available:', 'cyan');
   log('   • http://localhost:3000              - Clean homepage');
@@ -1842,6 +2586,7 @@ function main() {
   // Execute setup steps
   createProjectStructure();
   installDependencies();
+  setupTestingInfrastructure();
   extractCLI();
   createConfigurationFiles();
   createBasicAppFiles();

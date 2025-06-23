@@ -1,1 +1,1 @@
- 
+All new projects include automated testing infrastructure (Jest, Playwright, CI/CD) by default. See the main README for details. 
