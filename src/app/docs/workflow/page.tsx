@@ -1,6 +1,120 @@
 import Link from 'next/link';
 
 export default function WorkflowDocs() {
+  const workflowSteps = [
+    {
+      step: 1,
+      title: 'Session Start',
+      description: 'Begin development with project validation',
+      command: 'node utils/cli.js session-start --project="Feature Name"',
+      icon: '🚀',
+      details: 'Validates project structure, logs session start, and prepares development environment'
+    },
+    {
+      step: 2,
+      title: 'Pick Ticket',
+      description: 'Select next ticket to work on',
+      command: 'node utils/cli.js pick-ticket',
+      icon: '🎫',
+      details: 'Interactive ticket selection with filtering by status and priority'
+    },
+    {
+      step: 3,
+      title: 'Development',
+      description: 'Implement features and functionality',
+      command: 'npm run dev',
+      icon: '💻',
+      details: 'Start development server and begin coding features'
+    },
+    {
+      step: 4,
+      title: 'Quality Assurance',
+      description: 'Run comprehensive tests and checks',
+      command: 'node utils/cli.js qa-test',
+      icon: '🧪',
+      details: 'Runs linting, type checking, unit tests with coverage, and E2E tests'
+    },
+    {
+      step: 5,
+      title: 'Status Check',
+      description: 'Check project status and progress',
+      command: 'node utils/cli.js status-report',
+      icon: '📊',
+      details: 'Generate comprehensive project status report with metrics'
+    },
+    {
+      step: 6,
+      title: 'Session Wrap-up',
+      description: 'Complete session with documentation validation',
+      command: 'node utils/cli.js session-wrapup',
+      icon: '🏁',
+      details: 'Validates docs, runs tests, checks git status, and generates session report'
+    }
+  ];
+
+  const additionalCommands = [
+    {
+      category: 'Reporting & Analysis',
+      commands: [
+        {
+          name: 'sprint-report',
+          description: 'Generate comprehensive sprint report with recommendations',
+          command: 'node utils/cli.js sprint-report'
+        },
+        {
+          name: 'list-stories',
+          description: 'View all user stories with status and points',
+          command: 'node utils/cli.js list-stories'
+        },
+        {
+          name: 'list-issues',
+          description: 'List all issues with severity and status',
+          command: 'node utils/cli.js list-issues'
+        }
+      ]
+    },
+    {
+      category: 'Validation & Quality',
+      commands: [
+        {
+          name: 'validate-docs',
+          description: 'Validate documentation consistency and completeness',
+          command: 'node utils/cli.js validate-docs'
+        },
+        {
+          name: 'validate-structure',
+          description: 'Validate project structure and file organization',
+          command: 'node utils/cli.js validate-structure'
+        },
+        {
+          name: 'check-deps',
+          description: 'Check and validate project dependencies',
+          command: 'node utils/cli.js check-deps'
+        }
+      ]
+    },
+    {
+      category: 'Project Management',
+      commands: [
+        {
+          name: 'update-ticket',
+          description: 'Update ticket status and information',
+          command: 'node utils/cli.js update-ticket --id=TICKET-001 --status="In Progress"'
+        },
+        {
+          name: 'pick-story',
+          description: 'Pick a user story to work on',
+          command: 'node utils/cli.js pick-story'
+        },
+        {
+          name: 'archive-project',
+          description: 'Archive project or specific components',
+          command: 'node utils/cli.js archive-project --type=full'
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -17,174 +131,134 @@ export default function WorkflowDocs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Development Workflow</h2>
-            <p className="text-gray-600 mb-6">
-              The complete development process from concept to completion.
-            </p>
-            
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">1</div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Session Start</h3>
-                  <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mt-2">
-                    <div className="text-gray-400">$ node utils/cli.js session-start --project=&quot;Feature Name&quot;</div>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Initialize development session with project context and validation
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-medium">2</div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Create PRD</h3>
-                  <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mt-2">
-                    <div className="text-gray-400">$ node utils/cli.js create-prd &quot;Feature Title&quot; --template=&quot;feature&quot;</div>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Define product requirements and specifications with structured templates
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-medium">3</div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Generate Stories</h3>
-                  <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mt-2">
-                    <div className="text-gray-400">$ node utils/cli.js generate-stories --prd=&quot;PRD-001&quot;</div>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Create user stories from PRD specifications with acceptance criteria
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-medium">4</div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Create Tickets</h3>
-                  <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mt-2">
-                    <div className="text-gray-400">$ node utils/cli.js create-ticket &quot;Ticket Title&quot; --type=&quot;feature&quot;</div>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Convert stories into development tickets with proper categorization
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Project Management</h2>
-            <p className="text-gray-600 mb-6">
-              Tools and processes for effective project management.
-            </p>
-            
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Status Tracking</h3>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
-                  <div className="text-gray-400">$ node utils/cli.js status-report --format=&quot;markdown&quot;</div>
-                </div>
-                <p className="text-sm text-gray-600 mt-2">
-                  Generate comprehensive project status reports with metrics and progress
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Ticket Management</h3>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
-                  <div className="text-gray-400">$ node utils/cli.js list-tickets --status=&quot;open&quot;</div>
-                </div>
-                <p className="text-sm text-gray-600 mt-2">
-                  View and manage development tickets with filtering and sorting
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Session Wrap-up</h3>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
-                  <div className="text-gray-400">$ node utils/cli.js session-wrapup --summary=&quot;Session summary&quot;</div>
-                </div>
-                <p className="text-sm text-gray-600 mt-2">
-                  Document session progress and plan next steps with automatic logging
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">Project Backup</h3>
-                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm">
-                  <div className="text-gray-400">$ node utils/cli.js archive-config</div>
-                </div>
-                <p className="text-sm text-gray-600 mt-2">
-                  Create configuration backups before major changes or milestones
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+          <h2 className="text-lg font-semibold text-blue-900 mb-3">🎯 Core Development Workflow</h2>
+          <p className="text-blue-800 text-sm">
+            Follow this streamlined 6-step workflow to maximize productivity and maintain code quality. 
+            Each step is designed to ensure consistent development practices and project health.
+          </p>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Workflow Phases</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-4">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Development Workflow Steps</h2>
+          <div className="space-y-6">
+            {workflowSteps.map((step, index) => (
+              <div key={index} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                    <span className="text-2xl">{step.icon}</span>
+                  </div>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900">Planning Phase</h3>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <span className="text-sm font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                      Step {step.step}
+                    </span>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {step.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 mb-3">
+                    {step.description}
+                  </p>
+                  <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mb-2">
+                    <div className="text-gray-400">$ {step.command}</div>
+                  </div>
+                  <p className="text-sm text-gray-500">
+                    {step.details}
+                  </p>
+                </div>
               </div>
-              <ul className="text-gray-600 space-y-2 text-sm">
-                <li>• Create PRD with clear requirements</li>
-                <li>• Define acceptance criteria</li>
-                <li>• Estimate story points</li>
-                <li>• Identify dependencies</li>
-                <li>• Set priorities and deadlines</li>
-              </ul>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Additional Commands</h2>
+            <p className="text-gray-600 mb-6">
+              Powerful commands to enhance your development workflow.
+            </p>
             
-            <div className="space-y-4">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+            <div className="space-y-6">
+              {additionalCommands.map((category, categoryIndex) => (
+                <div key={categoryIndex}>
+                  <h3 className="text-lg font-medium text-gray-900 mb-3">{category.category}</h3>
+                  <div className="space-y-3">
+                    {category.commands.map((command, commandIndex) => (
+                      <div key={commandIndex} className="bg-gray-50 rounded-lg p-3">
+                        <div className="flex items-start justify-between mb-2">
+                          <h4 className="text-sm font-medium text-gray-900">{command.name}</h4>
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            CLI
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-600 mb-2">{command.description}</p>
+                        <code className="text-xs bg-gray-100 px-2 py-1 rounded text-gray-800">
+                          {command.command}
+                        </code>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900">Development Phase</h3>
-              </div>
-              <ul className="text-gray-600 space-y-2 text-sm">
-                <li>• Start development sessions</li>
-                <li>• Implement features iteratively</li>
-                <li>• Write tests for functionality</li>
-                <li>• Update ticket status</li>
-                <li>• Document code changes</li>
-              </ul>
+              ))}
             </div>
-            
-            <div className="space-y-4">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Workflow Phases</h2>
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900">Planning Phase</h3>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900">Review Phase</h3>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li>• Use <code className="bg-gray-100 px-1 rounded">session-start</code> to begin</li>
+                  <li>• Pick tickets with <code className="bg-gray-100 px-1 rounded">pick-ticket</code></li>
+                  <li>• Review status with <code className="bg-gray-100 px-1 rounded">status-report</code></li>
+                  <li>• Validate structure with <code className="bg-gray-100 px-1 rounded">validate-structure</code></li>
+                </ul>
               </div>
-              <ul className="text-gray-600 space-y-2 text-sm">
-                <li>• Code review and testing</li>
-                <li>• Validate against requirements</li>
-                <li>• Update documentation</li>
-                <li>• Generate status reports</li>
-                <li>• Plan next iteration</li>
-              </ul>
+              
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900">Development Phase</h3>
+                </div>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li>• Run <code className="bg-gray-100 px-1 rounded">qa-test</code> for quality checks</li>
+                  <li>• Update tickets with <code className="bg-gray-100 px-1 rounded">update-ticket</code></li>
+                  <li>• Check dependencies with <code className="bg-gray-100 px-1 rounded">check-deps</code></li>
+                  <li>• Validate docs with <code className="bg-gray-100 px-1 rounded">validate-docs</code></li>
+                </ul>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900">Review Phase</h3>
+                </div>
+                <ul className="text-gray-600 space-y-2 text-sm">
+                  <li>• Generate <code className="bg-gray-100 px-1 rounded">sprint-report</code> for analysis</li>
+                  <li>• Complete with <code className="bg-gray-100 px-1 rounded">session-wrapup</code></li>
+                  <li>• Archive with <code className="bg-gray-100 px-1 rounded">archive-project</code></li>
+                  <li>• Plan next iteration</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -193,133 +267,87 @@ export default function WorkflowDocs() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Best Practices</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-3">Documentation</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-3">Quality Assurance</h3>
               <ul className="text-gray-600 space-y-2">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Write clear, concise PRDs with measurable outcomes
+                  Always run <code className="bg-gray-100 px-1 rounded">qa-test</code> before committing
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Use consistent naming conventions across all files
+                  Use <code className="bg-gray-100 px-1 rounded">validate-docs</code> for documentation checks
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Include acceptance criteria for every story
+                  Check dependencies regularly with <code className="bg-gray-100 px-1 rounded">check-deps</code>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Document technical decisions and architecture choices
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Keep documentation updated as requirements evolve
+                  Validate project structure with <code className="bg-gray-100 px-1 rounded">validate-structure</code>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-3">Development</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-3">Project Management</h3>
               <ul className="text-gray-600 space-y-2">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Follow the established workflow consistently
+                  Start every session with <code className="bg-gray-100 px-1 rounded">session-start</code>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Create small, focused tickets that can be completed in one session
+                  Generate <code className="bg-gray-100 px-1 rounded">sprint-report</code> for weekly reviews
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Test thoroughly before marking tickets as complete
+                  Archive projects regularly with <code className="bg-gray-100 px-1 rounded">archive-project</code>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  Update ticket status regularly throughout development
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✓</span>
-                  Use session logging to track progress and decisions
+                  Always complete sessions with <code className="bg-gray-100 px-1 rounded">session-wrapup</code>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-          <h2 className="text-lg font-semibold text-blue-900 mb-2">🔄 Workflow Automation</h2>
-          <p className="text-blue-800 mb-4">
-            Automate your workflow with these advanced techniques:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-green-900 mb-3">🎯 Workflow Summary</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div>
-              <h3 className="font-medium text-blue-900 mb-2">CLI Aliases</h3>
-              <div className="bg-blue-100 rounded p-3">
-                <code className="text-sm text-blue-900">
-                  alias cm-start=&quot;node utils/cli.js session-start&quot;<br/>
-                  alias cm-prd=&quot;node utils/cli.js create-prd&quot;<br/>
-                  alias cm-status=&quot;node utils/cli.js status-report&quot;
-                </code>
-              </div>
-            </div>
-            <div>
-              <h3 className="font-medium text-blue-900 mb-2">IDE Integration</h3>
-              <ul className="text-blue-800 space-y-1 text-sm">
-                <li>• Set up VS Code tasks for common commands</li>
-                <li>• Create keyboard shortcuts for workflow steps</li>
-                <li>• Use terminal integration for quick access</li>
-                <li>• Configure auto-completion for CLI commands</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-          <h2 className="text-lg font-semibold text-green-900 mb-2">✅ Quality Assurance</h2>
-          <p className="text-green-800 mb-4">
-            Ensure quality throughout the development process:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h3 className="font-medium text-green-900 mb-2">Validation Steps</h3>
-              <ul className="text-green-800 space-y-1 text-sm">
-                <li>• Review PRDs before implementation begins</li>
-                <li>• Validate user stories against requirements</li>
-                <li>• Test all functionality thoroughly</li>
-                <li>• Document changes and decisions</li>
-                <li>• Get feedback early and often</li>
+              <h3 className="font-medium text-green-900 mb-2">Core Workflow (6 steps)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>1. session-start</li>
+                <li>2. pick-ticket</li>
+                <li>3. development</li>
+                <li>4. qa-test</li>
+                <li>5. status-report</li>
+                <li>6. session-wrapup</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-green-900 mb-2">Continuous Improvement</h3>
-              <ul className="text-green-800 space-y-1 text-sm">
-                <li>• Regular retrospectives on workflow effectiveness</li>
-                <li>• Update templates based on project learnings</li>
-                <li>• Refine CLI commands for better efficiency</li>
-                <li>• Share best practices with team members</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-yellow-900 mb-2">💡 Workflow Tips</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h3 className="font-medium text-yellow-900 mb-2">Getting Started</h3>
-              <ul className="text-yellow-800 space-y-1 text-sm">
-                <li>• Start with simple features to learn the workflow</li>
-                <li>• Use the admin demo to explore all capabilities</li>
-                <li>• Create your first PRD and generate stories</li>
-                <li>• Practice session management with real work</li>
+              <h3 className="font-medium text-green-900 mb-2">Additional Commands (9)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• sprint-report</li>
+                <li>• validate-docs</li>
+                <li>• validate-structure</li>
+                <li>• check-deps</li>
+                <li>• update-ticket</li>
+                <li>• archive-project</li>
+                <li>• list-stories</li>
+                <li>• list-issues</li>
+                <li>• pick-story</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-yellow-900 mb-2">Advanced Techniques</h3>
-              <ul className="text-yellow-800 space-y-1 text-sm">
-                <li>• Customize templates for your project needs</li>
-                <li>• Create custom CLI commands for specific workflows</li>
-                <li>• Integrate with your existing tools and processes</li>
-                <li>• Build automation scripts for repetitive tasks</li>
+              <h3 className="font-medium text-green-900 mb-2">Quality Focus</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• Automated testing</li>
+                <li>• Documentation validation</li>
+                <li>• Structure validation</li>
+                <li>• Dependency management</li>
+                <li>• Comprehensive reporting</li>
+                <li>• Project archiving</li>
               </ul>
             </div>
           </div>

@@ -144,19 +144,42 @@ function installDependencies() {
     'autoprefixer',
     'eslint',
     'eslint-config-next',
-    'jest',
+    'jest@29.7.0',
+    'jest-environment-jsdom@29.7.0',
     '@testing-library/react',
     '@testing-library/jest-dom',
     '@testing-library/user-event',
     '@playwright/test',
     '@types/jest',
     'jest-html-reporter',
-    '@playwright/test-reporter-html',
     'prettier'
   ];
   
   log('   📦 Installing development dependencies...', 'yellow');
   runCommand(`npm install --save-dev ${devDeps.join(' ')}`, 'Installing development dependencies');
+  
+  // Add package.json overrides to prevent deprecation warnings
+  updatePackageJsonOverrides();
+}
+
+function updatePackageJsonOverrides() {
+  log('   🔧 Adding package.json overrides to prevent deprecation warnings...', 'yellow');
+  
+  try {
+    const packageJsonPath = 'package.json';
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    
+    // Add overrides to force newer versions of deprecated packages
+    packageJson.overrides = {
+      "glob": "^10.4.5",
+      "inflight": "^2.0.0"
+    };
+    
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    log('   ✅ Added package.json overrides', 'green');
+  } catch (error) {
+    log('   ⚠️  Could not add package.json overrides', 'yellow');
+  }
 }
 
 function setupTestingInfrastructure() {
@@ -855,6 +878,13 @@ module.exports = createJestConfig(customJestConfig)`;
   
   fs.writeFileSync('jest.setup.js', jestSetup);
   log('   ✅ Created: jest.setup.js', 'green');
+  
+  // .npmrc for suppressing deprecation warnings
+  const npmrc = `# Suppress deprecation warnings for known safe packages
+loglevel=error`;
+  
+  fs.writeFileSync('.npmrc', npmrc);
+  log('   ✅ Created: .npmrc', 'green');
   
   // Playwright config
   const playwrightConfig = `import { defineConfig, devices } from '@playwright/test';
@@ -2463,10 +2493,14 @@ function testSetup() {
     runCommand('npm test -- --passWithNoTests', 'Testing Jest setup', { silent: true });
   }
   
-  // Test Playwright installation
+  // Test that deprecation warnings are suppressed
+  log('   🔧 Testing deprecation warning suppression...', 'yellow');
+  runCommand('npm install --dry-run', 'Testing npm install without deprecation warnings', { silent: true });
+  
+  // Test Playwright setup
   if (fs.existsSync('playwright.config.js')) {
-    log('   🎭 Testing Playwright installation...', 'yellow');
-    runCommand('npx playwright install --dry-run', 'Testing Playwright installation', { silent: true });
+    log('   🎭 Testing Playwright setup...', 'yellow');
+    runCommand('npx playwright install --with-deps', 'Installing Playwright browsers', { silent: true });
   }
   
   // Test dev server (start and stop quickly)
@@ -2524,6 +2558,8 @@ function generateNextSteps() {
   log('   ✅ Accessibility testing setup');
   log('   ✅ CI/CD pipeline with GitHub Actions');
   log('   ✅ Test coverage reporting (70% target)');
+  log('   ✅ Deprecation warning suppression (.npmrc + package.json overrides)');
+  log('   ✅ Demo content pages showcasing CLI features');
   log('   ✅ Git repository initialized');
   
   log('\n🚀 Next Steps:', 'cyan');
@@ -2566,11 +2602,379 @@ function generateNextSteps() {
   log('   • http://localhost:3000/docs/workflow - Workflow guide');
   log('   • http://localhost:3000/docs/components - Component library');
   log('   • http://localhost:3000/docs/api    - API documentation');
+  log('   • http://localhost:3000/demo-content/cli-commands - CLI Commands Demo');
+  log('   • http://localhost:3000/demo-content/workflow - Development Workflow Demo');
+  log('   • http://localhost:3000/demo-content/features - CM Kit Features Demo');
   log('   • http://localhost:3000/privacy      - Privacy Policy');
   log('   • http://localhost:3000/security     - Security Information');
   log('   • http://localhost:3000/terms        - Terms of Service');
   
   log('\n' + '='.repeat(60), 'blue');
+}
+
+function createDemoContentPages() {
+  log('\n🎭 Creating Demo Content Pages...', 'blue');
+  
+  // Create demo content directory
+  const demoContentDir = 'src/app/demo-content';
+  if (!fs.existsSync(demoContentDir)) {
+    fs.mkdirSync(demoContentDir, { recursive: true });
+    log('   ✅ Created: src/app/demo-content', 'green');
+  }
+  
+  // CLI Commands Demo Page
+  const cliCommandsDemo = `import React from 'react';
+
+export default function CLIDemo() {
+  const cliCommands = [
+    {
+      category: 'Session Management',
+      commands: [
+        { name: 'session-start', description: 'Start a development session with project validation' },
+        { name: 'session-wrapup', description: 'Complete development session with documentation validation' }
+      ]
+    },
+    {
+      category: 'Reporting & Status',
+      commands: [
+        { name: 'status-report', description: 'Generate comprehensive project status report' },
+        { name: 'sprint-report', description: 'Generate a comprehensive sprint report' }
+      ]
+    },
+    {
+      category: 'Ticket & Issue Management',
+      commands: [
+        { name: 'list-tickets', description: 'List all tickets with their status and priority' },
+        { name: 'list-stories', description: 'List all user stories' },
+        { name: 'list-issues', description: 'List all issues' },
+        { name: 'pick-ticket', description: 'Pick a ticket to work on' },
+        { name: 'pick-story', description: 'Pick a user story to work on' },
+        { name: 'update-ticket', description: 'Update ticket status and information' }
+      ]
+    },
+    {
+      category: 'Validation & Quality',
+      commands: [
+        { name: 'validate-structure', description: 'Validate project structure and file organization' },
+        { name: 'validate-docs', description: 'Validate documentation consistency and completeness' },
+        { name: 'check-deps', description: 'Check and validate project dependencies' },
+        { name: 'qa-test', description: 'Run QA tests and quality assurance checks' }
+      ]
+    },
+    {
+      category: 'Testing',
+      commands: [
+        { name: 'test', description: 'Run tests and provide testing utilities' }
+      ]
+    },
+    {
+      category: 'Archiving',
+      commands: [
+        { name: 'archive-project', description: 'Archive project or specific components with timestamp' }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            CLI Commands Demo
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explore all available CLI commands in the CM Kit workflow system. 
+            Each command is designed to streamline your development process.
+          </p>
+        </div>
+
+        <div className="grid gap-8">
+          {cliCommands.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b border-gray-200 pb-2">
+                {category.category}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2">
+                {category.commands.map((command, commandIndex) => (
+                  <div key={commandIndex} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-medium text-gray-900 mb-2">
+                          {command.name}
+                        </h3>
+                        <p className="text-gray-600 text-sm">
+                          {command.description}
+                        </p>
+                      </div>
+                      <div className="ml-4">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          CLI
+                        </span>
+                      </div>
+                    </div>
+                    <div className="mt-3">
+                      <code className="text-sm bg-gray-100 px-2 py-1 rounded text-gray-800">
+                        node utils/cli.js {command.name}
+                      </code>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 bg-blue-50 rounded-lg p-6 border border-blue-200">
+          <h3 className="text-lg font-semibold text-blue-900 mb-3">
+            🚀 Getting Started with CLI
+          </h3>
+          <div className="space-y-2 text-sm text-blue-800">
+            <p>• Run <code className="bg-blue-100 px-1 rounded">node utils/cli.js help</code> to see all commands</p>
+            <p>• Start with <code className="bg-blue-100 px-1 rounded">node utils/cli.js session-start</code> to begin development</p>
+            <p>• Use <code className="bg-blue-100 px-1 rounded">node utils/cli.js status-report</code> to check project health</p>
+            <p>• Complete sessions with <code className="bg-blue-100 px-1 rounded">node utils/cli.js session-wrapup</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+  fs.writeFileSync('src/app/demo-content/cli-commands/page.tsx', cliCommandsDemo);
+  log('   ✅ Created: src/app/demo-content/cli-commands/page.tsx', 'green');
+
+  // Workflow Demo Page
+  const workflowDemo = `import React from 'react';
+
+export default function WorkflowDemo() {
+  const workflowSteps = [
+    {
+      step: 1,
+      title: 'Session Start',
+      description: 'Begin development with project validation',
+      command: 'node utils/cli.js session-start',
+      icon: '🚀'
+    },
+    {
+      step: 2,
+      title: 'Pick Ticket',
+      description: 'Select next ticket to work on',
+      command: 'node utils/cli.js pick-ticket',
+      icon: '🎫'
+    },
+    {
+      step: 3,
+      title: 'Development',
+      description: 'Implement features and functionality',
+      command: 'npm run dev',
+      icon: '💻'
+    },
+    {
+      step: 4,
+      title: 'Testing',
+      description: 'Run tests and quality checks',
+      command: 'node utils/cli.js qa-test',
+      icon: '🧪'
+    },
+    {
+      step: 5,
+      title: 'Status Report',
+      description: 'Check project status and progress',
+      command: 'node utils/cli.js status-report',
+      icon: '📊'
+    },
+    {
+      step: 6,
+      title: 'Session Wrap-up',
+      description: 'Complete session with documentation validation',
+      command: 'node utils/cli.js session-wrapup',
+      icon: '🏁'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Development Workflow Demo
+          </h1>
+          <p className="text-xl text-gray-600">
+            Follow this streamlined workflow to maximize productivity and maintain code quality.
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {workflowSteps.map((step, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6">
+              <div className="flex items-center space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-2xl">{step.icon}</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <span className="text-sm font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded">
+                      Step {step.step}
+                    </span>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {step.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 mb-3">
+                    {step.description}
+                  </p>
+                  <div className="bg-gray-100 rounded-lg p-3">
+                    <code className="text-sm text-gray-800 font-mono">
+                      {step.command}
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 bg-green-50 rounded-lg p-6 border border-green-200">
+          <h3 className="text-lg font-semibold text-green-900 mb-3">
+            💡 Pro Tips
+          </h3>
+          <ul className="space-y-2 text-sm text-green-800">
+            <li>• Use <code className="bg-green-100 px-1 rounded">sprint-report</code> for weekly progress reviews</li>
+            <li>• Archive projects with <code className="bg-green-100 px-1 rounded">archive-project</code> for backups</li>
+            <li>• Validate docs with <code className="bg-green-100 px-1 rounded">validate-docs</code> before commits</li>
+            <li>• Check dependencies with <code className="bg-green-100 px-1 rounded">check-deps</code> regularly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+  fs.writeFileSync('src/app/demo-content/workflow/page.tsx', workflowDemo);
+  log('   ✅ Created: src/app/demo-content/workflow/page.tsx', 'green');
+
+  // Features Demo Page
+  const featuresDemo = `import React from 'react';
+
+export default function FeaturesDemo() {
+  const features = [
+    {
+      title: 'Comprehensive CLI System',
+      description: '15+ commands for project management, testing, and workflow automation',
+      icon: '🖥️',
+      commands: ['session-start', 'status-report', 'qa-test', 'sprint-report']
+    },
+    {
+      title: 'Automated Testing',
+      description: 'Jest unit tests, Playwright E2E tests, and CI/CD integration',
+      icon: '🧪',
+      commands: ['test', 'qa-test', 'npm run test:e2e']
+    },
+    {
+      title: 'Documentation Validation',
+      description: 'Automatic validation of README, docs, and sample content',
+      icon: '📚',
+      commands: ['validate-docs', 'validate-structure', 'session-wrapup']
+    },
+    {
+      title: 'Project Archiving',
+      description: 'Create timestamped backups of projects and configurations',
+      icon: '📦',
+      commands: ['archive-project', 'archive-config']
+    },
+    {
+      title: 'Ticket Management',
+      description: 'Track tickets, stories, and issues with status updates',
+      icon: '🎫',
+      commands: ['list-tickets', 'pick-ticket', 'update-ticket']
+    },
+    {
+      title: 'Quality Assurance',
+      description: 'Linting, type checking, and comprehensive QA testing',
+      icon: '✅',
+      commands: ['qa-test', 'check-deps', 'validate-structure']
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            CM Kit Features Demo
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover the powerful features that make CM Kit the ultimate development workflow system.
+          </p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+              <div className="text-center mb-4">
+                <div className="text-4xl mb-3">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  {feature.description}
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-gray-700">Related Commands:</h4>
+                {feature.commands.map((command, cmdIndex) => (
+                  <div key={cmdIndex} className="bg-gray-50 rounded px-3 py-1">
+                    <code className="text-xs text-gray-800 font-mono">
+                      {command}
+                    </code>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 bg-purple-50 rounded-lg p-6 border border-purple-200">
+          <h3 className="text-lg font-semibold text-purple-900 mb-3">
+            🎯 Why Choose CM Kit?
+          </h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <h4 className="font-medium text-purple-800 mb-2">Streamlined Workflow</h4>
+              <p className="text-sm text-purple-700">
+                From session start to wrap-up, every step is optimized for productivity.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-medium text-purple-800 mb-2">Quality Assurance</h4>
+              <p className="text-sm text-purple-700">
+                Built-in testing, validation, and documentation checks ensure code quality.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-medium text-purple-800 mb-2">Project Management</h4>
+              <p className="text-sm text-purple-700">
+                Track tickets, stories, and issues with powerful CLI tools.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-medium text-purple-800 mb-2">Automation</h4>
+              <p className="text-sm text-purple-700">
+                Automated setup, testing, and deployment with minimal configuration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+  fs.writeFileSync('src/app/demo-content/features/page.tsx', featuresDemo);
+  log('   ✅ Created: src/app/demo-content/features/page.tsx', 'green');
 }
 
 function main() {
@@ -2596,6 +3000,7 @@ function main() {
   createCursorConfig();
   createInitialTicket();
   createAgentContext();
+  createDemoContentPages();
   initializeGit();
   testSetup();
   

@@ -71,8 +71,9 @@ All new projects created with the CM Kit workflow system include a comprehensive
 
 - **Unit & Integration Tests**: Powered by **Jest** and **React Testing Library** for components, utilities, and CLI.
 - **End-to-End (E2E) Tests**: Powered by **Playwright** for user workflows, navigation, and accessibility.
-- **Test Coverage**: Jest coverage reporting is enabled by default. Aim for 70%+ coverage.
-- **CI/CD Integration**: GitHub Actions workflow runs all tests and uploads coverage on every push/PR.
+- **Test Coverage**: Jest coverage reporting with 70% target threshold
+- **CI/CD Integration**: GitHub Actions workflow runs all tests automatically
+- **Deprecation Warning Suppression**: `.npmrc` and `package.json` overrides prevent common npm warnings
 
 ### Test Directory Structure
 ```

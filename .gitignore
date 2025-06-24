@@ -116,4 +116,5 @@ archive-*/
 *.backup
 *.bak
 
+# Playwright test reports
 playwright-report/
