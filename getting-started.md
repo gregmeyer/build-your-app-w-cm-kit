@@ -42,6 +42,68 @@ cursor --version  # Should be available if installed
 
 ## 🤖 Automated Setup (Fastest Method)
 
+## Installation
+
+There are two ways to install and set up the CM Kit Workflow System:
+
+### 🤖 Automated Installation (Recommended)
+
+The fastest and most reliable way to get started is using the automated setup script:
+
+```bash
+# Run the automated setup script
+node automation/setup-automated.js
+```
+
+This script handles everything automatically:
+- ✅ Checks all prerequisites
+- ✅ Creates complete project structure
+- ✅ Installs all dependencies
+- ✅ Configures CLI system
+- ✅ Sets up testing infrastructure
+- ✅ Creates demo pages and documentation
+- ✅ Initializes Git repository
+- ✅ Runs validation tests
+
+### 📋 Manual Installation
+
+If you prefer to understand each step or need to customize the setup:
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd your-project-name
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up CLI system**
+   ```bash
+   node automation/extract-cli.js
+   ```
+
+4. **Create configuration files**
+   ```bash
+   # Copy configuration templates
+   cp automation/templates/configs/* .
+   ```
+
+5. **Initialize Git**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial setup: CM Kit Workflow System"
+   ```
+
+6. **Test the setup**
+   ```bash
+   npm test
+   node utils/cli.js validate-structure
+   ```
+
 **For the fastest setup experience, use the automated script that handles everything for you:**
 
 ```bash

@@ -24,6 +24,111 @@ This comprehensive guide will walk you through:
 - Creating your first development session
 - Using Cursor AI for development workflow
 
+## Features
+
+The CM Kit Workflow System provides a comprehensive development framework with the following key features:
+
+### 🛠️ **CLI Development Tools**
+- **18 CLI Commands** for complete workflow management
+- **Session Management** with automatic logging and validation
+- **Project Reporting** with status and sprint reports
+- **Ticket & Issue Management** with interactive selection
+- **Quality Assurance** with validation and testing commands
+- **Project Archiving** with timestamped backups
+
+### 🧪 **Testing Infrastructure**
+- **Jest** for unit and integration testing
+- **Playwright** for end-to-end testing
+- **Test Coverage** reporting and CI/CD integration
+- **Automated Testing** setup out of the box
+
+### 📚 **Documentation System**
+- **Comprehensive Documentation** pages (/docs)
+- **CLI Reference** with all commands and examples
+- **Workflow Guide** with step-by-step processes
+- **Component Library** with usage examples
+- **API Documentation** for integrations
+
+### 🎨 **UI Components**
+- **Modern UI Components** built with Tailwind CSS
+- **Responsive Design** with mobile-first approach
+- **Accessibility** compliant components
+- **TypeScript** support for type safety
+
+### 🔧 **Development Infrastructure**
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **ESLint & Prettier** for code quality
+- **Error Handling** with proper error pages
+- **Hydration Safe** components
+
+### 📋 **Project Management**
+- **PRD System** for product requirements
+- **Ticket System** for task management
+- **Story Tracking** for user stories
+- **Issue Management** for bug tracking
+- **Session Logging** for development tracking
+
+### 🚀 **Automation**
+- **Automated Setup** script for new projects
+- **CLI Extraction** from documentation
+- **Template System** for consistent structure
+- **Demo Management** with remove/restore commands
+
+## CLI Commands
+
+The CM Kit Platform includes 18 powerful CLI commands for complete workflow management:
+
+### 📋 **Session Management**
+```bash
+node utils/cli.js session-start --project="Feature Name"    # Start development session
+node utils/cli.js session-wrapup                            # Complete session with validation
+```
+
+### 📊 **Reporting & Status**
+```bash
+node utils/cli.js status-report                             # Generate project status report
+node utils/cli.js sprint-report                             # Generate comprehensive sprint report
+```
+
+### 🎫 **Ticket & Issue Management**
+```bash
+node utils/cli.js list-tickets                              # List all tickets
+node utils/cli.js list-stories                              # List all user stories
+node utils/cli.js list-issues                               # List all issues
+node utils/cli.js pick-ticket                               # Pick ticket to work on
+node utils/cli.js pick-story                                # Pick story to work on
+node utils/cli.js update-ticket --id=TICKET-001 --status="In Progress"  # Update ticket
+```
+
+### ✅ **Validation & Quality**
+```bash
+node utils/cli.js validate-structure                        # Validate project structure
+node utils/cli.js validate-docs                             # Validate documentation
+node utils/cli.js check-deps                                # Check dependencies
+node utils/cli.js qa-test                                   # Run comprehensive QA tests
+```
+
+### 🧪 **Testing**
+```bash
+node utils/cli.js test                                      # Run tests and utilities
+```
+
+### 📦 **Archiving & Demo Management**
+```bash
+node utils/cli.js archive-project --type=full              # Archive project components
+node utils/cli.js remove-demo                               # Remove demo content
+node utils/cli.js restore-demo                              # Restore demo content
+```
+
+### 📚 **Documentation**
+```bash
+node utils/cli.js validate-docs                             # Validate documentation completeness
+```
+
+For complete CLI documentation, see [docs/cli](src/app/docs/cli/page.tsx).
+
 ## 🤖 Automated Setup (Recommended)
 
 **For the fastest setup experience, use the automated script: [setup-automated.js](setup-automated.js)**
