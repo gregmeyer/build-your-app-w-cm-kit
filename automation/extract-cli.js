@@ -26,7 +26,7 @@ function extractCodeBlocks(markdownContent) {
         currentBlock = { language, content: [], filename: '' };
         
         // Check if next line contains filename
-        if (i + 1 < lines.length && lines[i + 1].includes('(') && lines[i + 1].includes(')')) {
+        if (i + 1 < lines.length && lines[i + 1].trim().startsWith('`') && lines[i + 1].includes('`')) {
           const filenameMatch = lines[i + 1].match(/`([^`]+)`/);
           if (filenameMatch) {
             currentBlock.filename = filenameMatch[1];
@@ -82,14 +82,13 @@ function createCLIFiles() {
   codeBlocks.forEach((block, index) => {
     if (block.filename) {
       const filePath = path.join(process.cwd(), block.filename);
-      const content = block.content.join('\n');
-      
+      // Remove filename annotation lines from content
+      const content = block.content.filter(line => !/^`.*`$/.test(line.trim())).join('\n');
       // Ensure directory exists
       const dir = path.dirname(filePath);
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       }
-      
       fs.writeFileSync(filePath, content);
       console.log(`✅ Created: ${block.filename}`);
       filesCreated++;

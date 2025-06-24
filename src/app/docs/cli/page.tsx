@@ -1,6 +1,135 @@
 import Link from 'next/link';
 
 export default function CLIDocs() {
+  const cliCommands = [
+    {
+      category: 'Session Management',
+      commands: [
+        {
+          name: 'session-start',
+          description: 'Start a development session with project validation',
+          example: 'node utils/cli.js session-start --project="Feature Name"',
+          details: 'Validates project structure, logs session start, and prepares development environment'
+        },
+        {
+          name: 'session-wrapup',
+          description: 'Complete development session with documentation validation',
+          example: 'node utils/cli.js session-wrapup',
+          details: 'Validates docs, runs tests, checks git status, and generates comprehensive session report'
+        }
+      ]
+    },
+    {
+      category: 'Reporting & Status',
+      commands: [
+        {
+          name: 'status-report',
+          description: 'Generate comprehensive project status report',
+          example: 'node utils/cli.js status-report',
+          details: 'Shows project health, ticket status, git status, and development metrics'
+        },
+        {
+          name: 'sprint-report',
+          description: 'Generate a comprehensive sprint report',
+          example: 'node utils/cli.js sprint-report',
+          details: 'Analyzes tickets, stories, issues, and provides recommendations with metrics'
+        }
+      ]
+    },
+    {
+      category: 'Ticket & Issue Management',
+      commands: [
+        {
+          name: 'list-tickets',
+          description: 'List all tickets with their status and priority',
+          example: 'node utils/cli.js list-tickets',
+          details: 'Shows all tickets with status, priority, assignee, and creation date'
+        },
+        {
+          name: 'list-stories',
+          description: 'List all user stories',
+          example: 'node utils/cli.js list-stories',
+          details: 'Displays user stories with status, story points, and dependencies'
+        },
+        {
+          name: 'list-issues',
+          description: 'List all issues',
+          example: 'node utils/cli.js list-issues',
+          details: 'Shows all issues with severity, status, and resolution status'
+        },
+        {
+          name: 'pick-ticket',
+          description: 'Pick a ticket to work on',
+          example: 'node utils/cli.js pick-ticket',
+          details: 'Interactive ticket selection with filtering by status and priority'
+        },
+        {
+          name: 'pick-story',
+          description: 'Pick a user story to work on',
+          example: 'node utils/cli.js pick-story',
+          details: 'Interactive story selection with filtering by status and story points'
+        },
+        {
+          name: 'update-ticket',
+          description: 'Update ticket status and information',
+          example: 'node utils/cli.js update-ticket --id=TICKET-001 --status="In Progress"',
+          details: 'Update ticket status, name, description, or rename ticket ID'
+        }
+      ]
+    },
+    {
+      category: 'Validation & Quality',
+      commands: [
+        {
+          name: 'validate-structure',
+          description: 'Validate project structure and file organization',
+          example: 'node utils/cli.js validate-structure',
+          details: 'Checks directory structure, required files, and project organization'
+        },
+        {
+          name: 'validate-docs',
+          description: 'Validate documentation consistency and completeness',
+          example: 'node utils/cli.js validate-docs',
+          details: 'Validates README, getting-started, docs, and sample content completeness'
+        },
+        {
+          name: 'check-deps',
+          description: 'Check and validate project dependencies',
+          example: 'node utils/cli.js check-deps',
+          details: 'Analyzes package.json, checks for updates, and validates dependency health'
+        },
+        {
+          name: 'qa-test',
+          description: 'Run QA tests and quality assurance checks',
+          example: 'node utils/cli.js qa-test',
+          details: 'Runs linting, type checking, unit tests with coverage, and E2E tests'
+        }
+      ]
+    },
+    {
+      category: 'Testing',
+      commands: [
+        {
+          name: 'test',
+          description: 'Run tests and provide testing utilities',
+          example: 'node utils/cli.js test',
+          details: 'Executes Jest unit tests and provides testing utilities'
+        }
+      ]
+    },
+    {
+      category: 'Archiving',
+      commands: [
+        {
+          name: 'archive-project',
+          description: 'Archive project or specific components with timestamp',
+          example: 'node utils/cli.js archive-project --type=full',
+          details: 'Creates timestamped backups of full project, config, docs, CLI, or templates'
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -13,105 +142,56 @@ export default function CLIDocs() {
           </Link>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">CLI Reference</h1>
           <p className="text-xl text-gray-600">
-            Complete command-line interface documentation for CM Kit
+            Complete command-line interface documentation for CM Kit - 15 powerful commands for streamlined development
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Available Commands</h2>
-          <p className="text-gray-600 mb-6">
-            Run <code className="bg-gray-100 px-2 py-1 rounded">node utils/cli.js --help</code> to see all available commands.
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Session Management</h3>
-                <div className="space-y-3">
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js session-start</div>
-                    <div className="mt-1">🚀 Start a new development session</div>
-                    <div className="text-gray-500 text-xs mt-1">Validates project structure and logs session start</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js session-wrapup</div>
-                    <div className="mt-1">✅ End session and log progress</div>
-                    <div className="text-gray-500 text-xs mt-1">Creates session log and generates status report</div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">PRD Management</h3>
-                <div className="space-y-3">
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js create-prd &quot;Feature Title&quot; --template=&quot;feature&quot;</div>
-                    <div className="mt-1">📋 Create a new Product Requirements Document</div>
-                    <div className="text-gray-500 text-xs mt-1">Templates: feature, bug, enhancement, research</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js list-prds</div>
-                    <div className="mt-1">📚 List all PRDs with status</div>
-                    <div className="text-gray-500 text-xs mt-1">Shows creation date, status, and template type</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js generate-stories --prd=&quot;PRD-001&quot;</div>
-                    <div className="mt-1">📖 Generate user stories from PRD</div>
-                    <div className="text-gray-500 text-xs mt-1">Creates stories/ directory with structured stories</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Project Management</h3>
-                <div className="space-y-3">
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js list-tickets</div>
-                    <div className="mt-1">🎫 View all current tickets</div>
-                    <div className="text-gray-500 text-xs mt-1">Shows status, priority, and assignee</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js status-report --format=&quot;markdown&quot;</div>
-                    <div className="mt-1">📊 Generate comprehensive progress report</div>
-                    <div className="text-gray-500 text-xs mt-1">Formats: markdown, json, console</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js list-stories</div>
-                    <div className="mt-1">📝 View all user stories</div>
-                    <div className="text-gray-500 text-xs mt-1">Shows story points, status, and dependencies</div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Maintenance</h3>
-                <div className="space-y-3">
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js archive-config</div>
-                    <div className="mt-1">📦 Create project configuration backup</div>
-                    <div className="text-gray-500 text-xs mt-1">Backs up essential files to archive/ directory</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js remove-demo</div>
-                    <div className="mt-1">🧹 Remove demo files and sample content</div>
-                    <div className="text-gray-500 text-xs mt-1">Preserves documentation and core functionality</div>
-                  </div>
-                  <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                    <div className="text-gray-400">$ node utils/cli.js reset-project</div>
-                    <div className="mt-1">🔄 Reset project to clean state</div>
-                    <div className="text-gray-500 text-xs mt-1">Removes all sample content and resets structure</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+          <h2 className="text-lg font-semibold text-blue-900 mb-3">🚀 Quick Start</h2>
+          <div className="space-y-2 text-sm text-blue-800">
+            <p>• Run <code className="bg-blue-100 px-1 rounded">node utils/cli.js help</code> to see all commands</p>
+            <p>• Start with <code className="bg-blue-100 px-1 rounded">node utils/cli.js session-start</code> to begin development</p>
+            <p>• Use <code className="bg-blue-100 px-1 rounded">node utils/cli.js status-report</code> to check project health</p>
+            <p>• Complete sessions with <code className="bg-blue-100 px-1 rounded">node utils/cli.js session-wrapup</code></p>
           </div>
+        </div>
+
+        <div className="space-y-8">
+          {cliCommands.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4 border-b border-gray-200 pb-2">
+                {category.category}
+              </h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {category.commands.map((command, commandIndex) => (
+                  <div key={commandIndex} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-lg font-medium text-gray-900">
+                        {command.name}
+                      </h3>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        CLI
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm mb-3">
+                      {command.description}
+                    </p>
+                    <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-sm mb-3">
+                      <div className="text-gray-400">$ {command.example}</div>
+                    </div>
+                    <p className="text-gray-500 text-xs">
+                      {command.details}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Command Options & Flags</h2>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 mb-2">Global Options</h3>
               <div className="bg-gray-50 rounded p-4">
@@ -134,12 +214,22 @@ export default function CLIDocs() {
               </div>
             </div>
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">PRD Options</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Ticket Options</h3>
               <div className="bg-gray-50 rounded p-4">
                 <code className="text-sm text-gray-800">
-                  --template=&lt;type&gt;   Template type (feature, bug, enhancement)<br/>
-                  --priority=&lt;level&gt;  Priority (low, medium, high, critical)<br/>
-                  --assignee=&lt;name&gt;   Assign to team member
+                  --id=&lt;ticket-id&gt;   Ticket identifier<br/>
+                  --status=&lt;status&gt;  Update ticket status<br/>
+                  --name=&lt;name&gt;      Update ticket name<br/>
+                  --description=&lt;text&gt; Update description
+                </code>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Archive Options</h3>
+              <div className="bg-gray-50 rounded p-4">
+                <code className="text-sm text-gray-800">
+                  --type=&lt;type&gt;      Archive type (full, config, docs, cli, templates)<br/>
+                  --timestamp         Include timestamp in archive name
                 </code>
               </div>
             </div>
@@ -150,84 +240,109 @@ export default function CLIDocs() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Usage Examples</h2>
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Starting a Development Session</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Complete Development Workflow</h3>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                <div className="text-gray-400"># Start a new session with project context</div>
-                <div className="mt-2">$ node utils/cli.js session-start --project=&quot;User Authentication&quot; --description=&quot;Implementing OAuth flow&quot;</div>
-                <div className="text-gray-500 text-xs mt-1">✅ Session started: User Authentication (2024-01-15 10:30:00)</div>
+                <div className="text-gray-400"># Start development session</div>
+                <div className="mt-2">$ node utils/cli.js session-start --project="User Authentication"</div>
+                <div className="text-gray-400"># Pick a ticket to work on</div>
+                <div className="mt-2">$ node utils/cli.js pick-ticket</div>
+                <div className="text-gray-400"># Run QA tests</div>
+                <div className="mt-2">$ node utils/cli.js qa-test</div>
+                <div className="text-gray-400"># Generate sprint report</div>
+                <div className="mt-2">$ node utils/cli.js sprint-report</div>
+                <div className="text-gray-400"># Complete session</div>
+                <div className="mt-2">$ node utils/cli.js session-wrapup</div>
               </div>
             </div>
             
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Creating a Feature PRD</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Project Management</h3>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                <div className="text-gray-400"># Create a new feature PRD</div>
-                <div className="mt-2">$ node utils/cli.js create-prd &quot;User Dashboard&quot; --template=&quot;feature&quot; --priority=&quot;high&quot;</div>
-                <div className="text-gray-500 text-xs mt-1">✅ Created: docs/prd/active/PRD-002-user-dashboard.md</div>
+                <div className="text-gray-400"># Check project status</div>
+                <div className="mt-2">$ node utils/cli.js status-report</div>
+                <div className="text-gray-400"># List all tickets</div>
+                <div className="mt-2">$ node utils/cli.js list-tickets</div>
+                <div className="text-gray-400"># Update ticket status</div>
+                <div className="mt-2">$ node utils/cli.js update-ticket --id=TICKET-001 --status="In Progress"</div>
+                <div className="text-gray-400"># Validate documentation</div>
+                <div className="mt-2">$ node utils/cli.js validate-docs</div>
               </div>
             </div>
             
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Generating Status Report</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Project Archiving</h3>
               <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                <div className="text-gray-400"># Generate a markdown status report</div>
-                <div className="mt-2">$ node utils/cli.js status-report --format=&quot;markdown&quot; --output=&quot;status.md&quot;</div>
-                <div className="text-gray-500 text-xs mt-1">✅ Report generated: status.md</div>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Creating Project Backup</h3>
-              <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
-                <div className="text-gray-400"># Create a backup of current project configuration</div>
-                <div className="mt-2">$ node utils/cli.js archive-config</div>
-                <div className="text-gray-500 text-xs mt-1">✅ Archive created: archive/archive-2024-01-15T10-30-00-000Z/</div>
+                <div className="text-gray-400"># Archive full project</div>
+                <div className="mt-2">$ node utils/cli.js archive-project --type=full</div>
+                <div className="text-gray-400"># Archive only configuration</div>
+                <div className="mt-2">$ node utils/cli.js archive-project --type=config</div>
+                <div className="text-gray-400"># Archive documentation</div>
+                <div className="mt-2">$ node utils/cli.js archive-project --type=docs</div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
-          <h2 className="text-lg font-semibold text-yellow-900 mb-2">💡 Pro Tips</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-lg font-semibold text-yellow-900 mb-3">💡 Pro Tips</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium text-yellow-900 mb-2">Workflow Best Practices</h3>
               <ul className="text-yellow-800 space-y-1 text-sm">
                 <li>• Always start sessions with <code className="bg-yellow-100 px-1 rounded">session-start</code></li>
-                <li>• Use descriptive project names and descriptions</li>
-                <li>• Generate status reports before ending sessions</li>
-                <li>• Keep PRDs updated as requirements evolve</li>
+                <li>• Use <code className="bg-yellow-100 px-1 rounded">qa-test</code> before committing changes</li>
+                <li>• Generate <code className="bg-yellow-100 px-1 rounded">sprint-report</code> for weekly reviews</li>
+                <li>• Archive projects regularly with <code className="bg-yellow-100 px-1 rounded">archive-project</code></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-yellow-900 mb-2">Command Efficiency</h3>
+              <h3 className="font-medium text-yellow-900 mb-2">Quality Assurance</h3>
               <ul className="text-yellow-800 space-y-1 text-sm">
-                <li>• Use <code className="bg-yellow-100 px-1 rounded">--help</code> for detailed command info</li>
-                <li>• Combine flags for faster execution</li>
-                <li>• Use quotes around names with spaces</li>
-                <li>• Check the workflow guide for advanced patterns</li>
+                <li>• Run <code className="bg-yellow-100 px-1 rounded">validate-docs</code> before releases</li>
+                <li>• Use <code className="bg-yellow-100 px-1 rounded">check-deps</code> to maintain dependencies</li>
+                <li>• Validate structure with <code className="bg-yellow-100 px-1 rounded">validate-structure</code></li>
+                <li>• Complete sessions with <code className="bg-yellow-100 px-1 rounded">session-wrapup</code></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-blue-900 mb-2">🔗 Related Resources</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-green-900 mb-3">🎯 Command Summary</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
-              <h3 className="font-medium text-blue-900 mb-2">Documentation</h3>
-              <ul className="text-blue-800 space-y-1 text-sm">
-                <li>• <Link href="/docs/workflow" className="hover:underline">Workflow Guide</Link> - Complete workflow process</li>
-                <li>• <Link href="/docs/components" className="hover:underline">Component Library</Link> - UI components reference</li>
-                <li>• <Link href="/docs/api" className="hover:underline">API Documentation</Link> - Integration guides</li>
+              <h3 className="font-medium text-green-900 mb-2">Session (2)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• session-start</li>
+                <li>• session-wrapup</li>
               </ul>
             </div>
             <div>
-              <h3 className="font-medium text-blue-900 mb-2">Getting Started</h3>
-              <ul className="text-blue-800 space-y-1 text-sm">
-                <li>• <Link href="/admin/demo" className="hover:underline">Admin Demo</Link> - Interactive workflow demo</li>
-                <li>• <Link href="/docs" className="hover:underline">Documentation Index</Link> - All guides and references</li>
-                <li>• <Link href="/" className="hover:underline">Homepage</Link> - Project overview and quick start</li>
+              <h3 className="font-medium text-green-900 mb-2">Reporting (2)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• status-report</li>
+                <li>• sprint-report</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-green-900 mb-2">Management (6)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• list-tickets</li>
+                <li>• list-stories</li>
+                <li>• list-issues</li>
+                <li>• pick-ticket</li>
+                <li>• pick-story</li>
+                <li>• update-ticket</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-green-900 mb-2">Quality (5)</h3>
+              <ul className="text-green-800 space-y-1">
+                <li>• validate-structure</li>
+                <li>• validate-docs</li>
+                <li>• check-deps</li>
+                <li>• qa-test</li>
+                <li>• test</li>
               </ul>
             </div>
           </div>

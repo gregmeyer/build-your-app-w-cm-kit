@@ -90,7 +90,36 @@ The CM Kit Workflow System now includes a **complete sample application** that d
 - **Footer** - Comprehensive footer with legal links, resources, and CM Kit attribution
 
 ### 🛠️ **Development Tools**
-- **CLI System** - Session management, ticket listing, status reports
+- **CLI System** - 15 powerful commands for streamlined development:
+  ```bash
+  # Session Management
+  node utils/cli.js session-start --project="Feature Name"    # Start development session
+  node utils/cli.js session-wrapup                            # Complete session with validation
+  
+  # Reporting & Status
+  node utils/cli.js status-report                             # Generate project status report
+  node utils/cli.js sprint-report                             # Generate comprehensive sprint report
+  
+  # Ticket & Issue Management
+  node utils/cli.js list-tickets                              # List all tickets
+  node utils/cli.js list-stories                              # List all user stories
+  node utils/cli.js list-issues                               # List all issues
+  node utils/cli.js pick-ticket                               # Pick ticket to work on
+  node utils/cli.js pick-story                                # Pick story to work on
+  node utils/cli.js update-ticket --id=TICKET-001 --status="In Progress"  # Update ticket
+  
+  # Validation & Quality
+  node utils/cli.js validate-structure                        # Validate project structure
+  node utils/cli.js validate-docs                             # Validate documentation
+  node utils/cli.js check-deps                                # Check dependencies
+  node utils/cli.js qa-test                                   # Run comprehensive QA tests
+  
+  # Testing
+  node utils/cli.js test                                      # Run tests and utilities
+  
+  # Archiving
+  node utils/cli.js archive-project --type=full              # Archive project components
+  ```
 - **PRD System** - Product Requirements Documents with story generation:
   ```bash
   node utils/cli.js create-prd "Feature Name"    # Create new PRD
@@ -128,7 +157,8 @@ The CM Kit Workflow System now includes a **complete sample application** that d
 - **Unit & Integration Tests**: Powered by **Jest** and **React Testing Library**. Test all components, utilities, and CLI commands.
 - **End-to-End (E2E) Tests**: Powered by **Playwright**. Test user workflows, navigation, accessibility, and cross-browser compatibility.
 - **Test Coverage**: Jest coverage reporting is enabled by default. Aim for 70%+ coverage.
-- **CI/CD Integration**: GitHub Actions workflow runs all tests (unit, integration, E2E) and uploads coverage on every push/PR.
+- **CI/CD Integration**: GitHub Actions workflow runs all tests (unit, integration, E2E) on every push/PR
+- **Deprecation Warning Suppression**: `.npmrc` and `package.json` overrides prevent common npm deprecation warnings
 - **Test Directory Structure**:
   ```
   tests/
@@ -192,12 +222,16 @@ The CM Kit workflow system consists of **six core components** that work togethe
 - **CLI integration** for creating, listing, and managing PRDs
 - **Template system** for consistent documentation
 
-### 2. CLI Tools
-- Automated project management and validation
-- Session management (start/end development sessions)
-- Real-time status reporting and project health checks
-- Extensible command system for custom workflows
+### 2. CLI Tools (15 Commands)
+- **Session Management**: Start and complete development sessions with validation
+- **Reporting & Status**: Generate comprehensive project and sprint reports
+- **Ticket & Issue Management**: List, pick, and update tickets and stories
+- **Validation & Quality**: Validate structure, docs, dependencies, and run QA tests
+- **Testing**: Execute tests and provide testing utilities
+- **Archiving**: Create timestamped backups of project components
 - **Automatic session logging and audit trails**
+- **Real-time status reporting and project health checks**
+- **Extensible command system for custom workflows**
 
 ### 3. Ticket System
 - Development task management with clear lifecycle
@@ -226,13 +260,20 @@ The CM Kit workflow system consists of **six core components** that work togethe
 ## Success Criteria
 
 The setup is successful when:
-✅ All CLI commands execute without errors
-✅ Session start/end workflows function properly
-✅ Status reporting provides accurate project metrics
-✅ Ticket and story listing works correctly
+✅ All 15 CLI commands execute without errors:
+  - session-start, session-wrapup
+  - status-report, sprint-report
+  - list-tickets, list-stories, list-issues
+  - pick-ticket, pick-story, update-ticket
+  - validate-structure, validate-docs, check-deps, qa-test
+  - test, archive-project
+✅ Session start/end workflows function properly with documentation validation
+✅ Status and sprint reporting provides accurate project metrics
+✅ Ticket and story listing works correctly with interactive selection
 ✅ Validation commands identify issues appropriately
+✅ QA testing runs comprehensive checks (linting, type checking, unit tests, E2E)
 ✅ Session logging creates detailed markdown logs
-✅ Archive configuration command creates proper backups
+✅ Archive project command creates proper timestamped backups
 ✅ Clean homepage renders correctly
 ✅ Admin demo page shows full workflow capabilities
 ✅ Blank page example demonstrates basic layout structure
@@ -241,6 +282,7 @@ The setup is successful when:
 ✅ Legal pages (Privacy, Security, Terms) are accessible
 ✅ No hydration mismatches or client/server rendering issues
 ✅ Navigation works seamlessly with both demo options
+✅ Documentation pages (/docs/cli, /docs/workflow) are comprehensive and up-to-date
 
 ## Key Implementation Notes
 
@@ -257,6 +299,8 @@ The setup is successful when:
 11. **CM Kit Attribution**: Automatic "Built with CM Kit" attribution linking to GitHub repository
 12. **Hydration Safe**: All components are designed to avoid hydration mismatches
 13. **Next.js 15 Ready**: Fully compatible with the latest Next.js features
+14. **Comprehensive Testing**: Full testing infrastructure with Jest and Playwright
+15. **Quality Assurance**: Built-in QA testing with linting, type checking, and test coverage
 
 ---
 

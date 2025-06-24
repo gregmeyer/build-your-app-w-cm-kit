@@ -1,0 +1,179 @@
+{
+  "timestamp": "2025-06-23T23:59:35.220Z",
+  "project": "CM Kit Next.js Application",
+  "sprint": "Sprint 2025-W4",
+  "summary": {
+    "name": "build-app-cm-kit",
+    "version": "1.0.0",
+    "description": "## Created 📅 2025-06-22",
+    "technologies": [
+      "Next.js 15 (App Router)",
+      "TypeScript",
+      "Tailwind CSS",
+      "React 18+"
+    ],
+    "lastUpdated": "2025-06-23T23:59:35.221Z",
+    "status": "Active Development"
+  },
+  "tickets": {
+    "total": 1,
+    "byStatus": {
+      "Unknown": 1
+    },
+    "byPriority": {
+      "Medium": 1
+    },
+    "tickets": [
+      {
+        "id": "TICKET-004-automated-testing",
+        "title": "Coverage and reporting",
+        "status": "Unknown",
+        "priority": "Medium",
+        "assignee": "",
+        "created": "",
+        "description": ""
+      }
+    ]
+  },
+  "stories": {
+    "total": 2,
+    "byStatus": {
+      "Unknown": 2
+    },
+    "stories": [
+      {
+        "id": "README",
+        "title": "STORY-XXX: [Title]",
+        "status": "Unknown",
+        "points": 0,
+        "description": ""
+      },
+      {
+        "id": "STORY-001-user-sign-in",
+        "title": "STORY-001: User Can Sign In with Google",
+        "status": "Unknown",
+        "points": 0,
+        "description": ""
+      }
+    ]
+  },
+  "issues": {
+    "total": 2,
+    "bySeverity": {
+      "Medium": 2
+    },
+    "issues": [
+      {
+        "id": "BUG-001-auth-error",
+        "title": "BUG-001: Google OAuth Authentication Error",
+        "severity": "Medium",
+        "status": "Open",
+        "description": ""
+      },
+      {
+        "id": "README",
+        "title": "BUG-XXX: [Title]",
+        "severity": "Medium",
+        "status": "Open",
+        "description": ""
+      }
+    ]
+  },
+  "metrics": {
+    "git": {
+      "totalCommits": 25,
+      "lastCommit": "8283ef0 - fix: resolve npm deprecation warnings and update testing dependencies (51 minutes ago)",
+      "currentBranch": "create-automated-tests",
+      "hasUncommittedChanges": true
+    },
+    "files": {
+      "totalFiles": 250,
+      "byType": {
+        "": 10,
+        ".json": 7,
+        ".md": 57,
+        ".js": 80,
+        ".tsx": 51,
+        ".css": 7,
+        ".png": 17,
+        ".html": 3,
+        ".info": 1,
+        ".ts": 1,
+        ".webm": 14,
+        ".xml": 1,
+        ".tsbuildinfo": 1
+      },
+      "byDirectory": {
+        "archive": 0,
+        "archive-2025-06-23T22-03-33-184Z": 3,
+        "automation": 0,
+        "docs": 1,
+        "prd": 1,
+        "active": 1,
+        "templates": 1,
+        "examples": 0,
+        "sample-issues": 1,
+        "sample-prds": 1,
+        "sample-stories": 4,
+        "sample-tickets": 3,
+        "implementation": 3,
+        "issues": 2,
+        "logs": 0,
+        "src": 0,
+        "app": 6,
+        "admin": 0,
+        "components": 1,
+        "demo": 1,
+        "workflow-demo": 1,
+        "api": 0,
+        "cli": 0,
+        "workflow": 1,
+        "privacy": 1,
+        "security": 1,
+        "terms": 1,
+        "test": 0,
+        "ui": 5,
+        "lib": 1,
+        "types": 0,
+        "stories": 2,
+        "tickets": 2,
+        "utils": 1,
+        "commands": 15,
+        "core": 1,
+        "modules": 9,
+        "configs": 6,
+        "legal": 3,
+        "pages": 0,
+        "coverage": 9,
+        "lcov-report": 8,
+        "playwright-report": 1,
+        "data": 15,
+        "blank": 1,
+        "test-results": 3,
+        "pages-homepage-docs-navigation-Mobile-Chrome": 3,
+        "pages-homepage-docs-navigation-Mobile-Safari": 3,
+        "pages-homepage-docs-navigation-chromium": 3,
+        "pages-homepage-docs-navigation-firefox": 3,
+        "pages-homepage-docs-navigation-webkit": 3,
+        "pages-homepage-navigation-works-correctly-Mobile-Chrome": 3,
+        "pages-homepage-navigation-works-correctly-Mobile-Safari": 3,
+        "tests": 1,
+        "e2e": 0,
+        "accessibility": 0,
+        "workflows": 0,
+        "integration": 0,
+        "unit": 0
+      }
+    },
+    "tests": {
+      "totalTestFiles": 0,
+      "hasJestConfig": true,
+      "hasPlaywrightConfig": true
+    }
+  },
+  "recommendations": [
+    "Address open issues to maintain code quality",
+    "Commit pending changes to maintain clean repository state",
+    "Add unit tests to ensure code reliability"
+  ]
+}
