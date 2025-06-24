@@ -1,0 +1,353 @@
+<testsuites id="" name="" tests="20" failures="7" skipped="0" errors="0" time="80.34109299999999">
+<testsuite name="pages/homepage.spec.js" timestamp="2025-06-23T23:55:04.887Z" hostname="chromium" tests="4" failures="1" skipped="0" time="36.794" errors="0">
+<testcase name="homepage loads correctly" classname="pages/homepage.spec.js" time="1.792">
+</testcase>
+<testcase name="navigation works correctly" classname="pages/homepage.spec.js" time="2.084">
+</testcase>
+<testcase name="demo page interactions" classname="pages/homepage.spec.js" time="1.808">
+</testcase>
+<testcase name="docs navigation" classname="pages/homepage.spec.js" time="31.11">
+<failure message="homepage.spec.js:34:5 docs navigation" type="FAILURE">
+<![CDATA[  [chromium] › pages/homepage.spec.js:34:5 › docs navigation ───────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Docs')
+
+
+      36 |   
+      37 |   // Navigate to docs
+    > 38 |   await page.click('text=Docs');
+         |              ^
+      39 |   await expect(page).toHaveURL(/.*docs/);
+      40 |   await expect(page.locator('h1')).toContainText('Documentation');
+      41 | }); 
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:38:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-docs-navigation-chromium/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-docs-navigation-chromium/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-chromium/video.webm]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-chromium/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="pages/homepage.spec.js" timestamp="2025-06-23T23:55:04.887Z" hostname="firefox" tests="4" failures="1" skipped="0" time="38.11" errors="0">
+<testcase name="homepage loads correctly" classname="pages/homepage.spec.js" time="2.061">
+</testcase>
+<testcase name="navigation works correctly" classname="pages/homepage.spec.js" time="3.217">
+</testcase>
+<testcase name="demo page interactions" classname="pages/homepage.spec.js" time="2.706">
+</testcase>
+<testcase name="docs navigation" classname="pages/homepage.spec.js" time="30.126">
+<failure message="homepage.spec.js:34:5 docs navigation" type="FAILURE">
+<![CDATA[  [firefox] › pages/homepage.spec.js:34:5 › docs navigation ────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Docs')
+
+
+      36 |   
+      37 |   // Navigate to docs
+    > 38 |   await page.click('text=Docs');
+         |              ^
+      39 |   await expect(page).toHaveURL(/.*docs/);
+      40 |   await expect(page.locator('h1')).toContainText('Documentation');
+      41 | }); 
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:38:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-firefox/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-firefox/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-docs-navigation-firefox/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-docs-navigation-firefox/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-firefox/video.webm]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-firefox/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="pages/homepage.spec.js" timestamp="2025-06-23T23:55:04.887Z" hostname="webkit" tests="4" failures="1" skipped="0" time="35.56" errors="0">
+<testcase name="homepage loads correctly" classname="pages/homepage.spec.js" time="2.004">
+</testcase>
+<testcase name="navigation works correctly" classname="pages/homepage.spec.js" time="2.284">
+</testcase>
+<testcase name="demo page interactions" classname="pages/homepage.spec.js" time="1.189">
+</testcase>
+<testcase name="docs navigation" classname="pages/homepage.spec.js" time="30.083">
+<failure message="homepage.spec.js:34:5 docs navigation" type="FAILURE">
+<![CDATA[  [webkit] › pages/homepage.spec.js:34:5 › docs navigation ─────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Docs')
+
+
+      36 |   
+      37 |   // Navigate to docs
+    > 38 |   await page.click('text=Docs');
+         |              ^
+      39 |   await expect(page).toHaveURL(/.*docs/);
+      40 |   await expect(page.locator('h1')).toContainText('Documentation');
+      41 | }); 
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:38:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-webkit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-webkit/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-docs-navigation-webkit/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-docs-navigation-webkit/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-webkit/video.webm]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-webkit/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="pages/homepage.spec.js" timestamp="2025-06-23T23:55:04.887Z" hostname="Mobile Chrome" tests="4" failures="2" skipped="0" time="63.108" errors="0">
+<testcase name="homepage loads correctly" classname="pages/homepage.spec.js" time="0.815">
+</testcase>
+<testcase name="navigation works correctly" classname="pages/homepage.spec.js" time="30.747">
+<failure message="homepage.spec.js:13:5 navigation works correctly" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › pages/homepage.spec.js:13:5 › navigation works correctly ───────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Demo')
+        - locator resolved to 3 elements. Proceeding with the first one: <a href="/admin/demo" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Demo</a>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        57 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+      15 |   
+      16 |   // Click on demo link
+    > 17 |   await page.click('text=Demo');
+         |              ^
+      18 |   
+      19 |   // Should navigate to demo page
+      20 |   await expect(page).toHaveURL(/.*demo/);
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:17:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-navigation-works-correctly-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-navigation-works-correctly-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-navigation-works-correctly-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="demo page interactions" classname="pages/homepage.spec.js" time="0.794">
+</testcase>
+<testcase name="docs navigation" classname="pages/homepage.spec.js" time="30.752">
+<failure message="homepage.spec.js:34:5 docs navigation" type="FAILURE">
+<![CDATA[  [Mobile Chrome] › pages/homepage.spec.js:34:5 › docs navigation ──────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Docs')
+
+
+      36 |   
+      37 |   // Navigate to docs
+    > 38 |   await page.click('text=Docs');
+         |              ^
+      39 |   await expect(page).toHaveURL(/.*docs/);
+      40 |   await expect(page.locator('h1')).toContainText('Documentation');
+      41 | }); 
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:38:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-Mobile-Chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-Mobile-Chrome/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-docs-navigation-Mobile-Chrome/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Chrome/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Chrome/video.webm]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Chrome/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="pages/homepage.spec.js" timestamp="2025-06-23T23:55:04.887Z" hostname="Mobile Safari" tests="4" failures="2" skipped="0" time="61.725" errors="0">
+<testcase name="homepage loads correctly" classname="pages/homepage.spec.js" time="0.765">
+</testcase>
+<testcase name="navigation works correctly" classname="pages/homepage.spec.js" time="30.089">
+<failure message="homepage.spec.js:13:5 navigation works correctly" type="FAILURE">
+<![CDATA[  [Mobile Safari] › pages/homepage.spec.js:13:5 › navigation works correctly ───────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Demo')
+        - locator resolved to 3 elements. Proceeding with the first one: <a href="/admin/demo" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Demo</a>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        57 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+      15 |   
+      16 |   // Click on demo link
+    > 17 |   await page.click('text=Demo');
+         |              ^
+      18 |   
+      19 |   // Should navigate to demo page
+      20 |   await expect(page).toHaveURL(/.*demo/);
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:17:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-navigation-works-correctly-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-navigation-works-correctly-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-navigation-works-correctly-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|pages-homepage-navigation-works-correctly-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="demo page interactions" classname="pages/homepage.spec.js" time="0.77">
+</testcase>
+<testcase name="docs navigation" classname="pages/homepage.spec.js" time="30.101">
+<failure message="homepage.spec.js:34:5 docs navigation" type="FAILURE">
+<![CDATA[  [Mobile Safari] › pages/homepage.spec.js:34:5 › docs navigation ──────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: page.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('text=Docs')
+
+
+      36 |   
+      37 |   // Navigate to docs
+    > 38 |   await page.click('text=Docs');
+         |              ^
+      39 |   await expect(page).toHaveURL(/.*docs/);
+      40 |   await expect(page.locator('h1')).toContainText('Documentation');
+      41 | }); 
+        at /Users/grmeyer/playground/build-app-cm-kit/tests/e2e/pages/homepage.spec.js:38:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-Mobile-Safari/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/pages-homepage-docs-navigation-Mobile-Safari/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../test-results/pages-homepage-docs-navigation-Mobile-Safari/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Safari/test-failed-1.png]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Safari/video.webm]]
+
+[[ATTACHMENT|pages-homepage-docs-navigation-Mobile-Safari/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

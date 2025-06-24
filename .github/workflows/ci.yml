@@ -43,7 +43,7 @@ jobs:
         name: codecov-umbrella
     
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results-${{ matrix.node-version }}
@@ -73,7 +73,7 @@ jobs:
       run: npm run test:e2e
     
     - name: Upload E2E test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-report

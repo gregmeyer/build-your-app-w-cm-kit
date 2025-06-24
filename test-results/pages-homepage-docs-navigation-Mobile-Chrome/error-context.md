@@ -1,0 +1,64 @@
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "☕ CM Kit":
+    - /url: /
+  - link "Full Demo":
+    - /url: /admin/demo
+- main:
+  - heading "Welcome to Your Project" [level=1]
+  - paragraph: You're ready to start building. This is your clean canvas - add your components, pages, and features here.
+  - heading "Getting Started" [level=2]
+  - paragraph: Start by creating your first component or page. The CM Kit Workflow System is ready to help you build efficiently.
+  - button "🚀 Start Building"
+  - link "View Demo":
+    - /url: /admin/demo
+    - button "View Demo"
+  - paragraph:
+    - text: "💡 Tip: Use the CLI tools in the"
+    - code: utils/
+    - text: directory
+  - paragraph:
+    - text: 📁 Your components are in
+    - code: src/components/
+  - paragraph: 🎨 Styling is set up with Tailwind CSS
+- contentinfo:
+  - text: ☕
+  - heading "CM Kit" [level=3]
+  - paragraph: Build better apps faster with our complete development toolkit. From idea to deployment with proven workflows, powerful CLI tools, and Cursor-powered development.
+  - link:
+    - /url: https://github.com/gregmeyer/build-your-app-w-cm-kit
+    - img
+  - heading "Legal" [level=4]
+  - list:
+    - listitem:
+      - link "Privacy Policy":
+        - /url: /privacy
+    - listitem:
+      - link "Security":
+        - /url: /security
+    - listitem:
+      - link "Terms of Service":
+        - /url: /terms
+  - heading "Resources" [level=4]
+  - list:
+    - listitem:
+      - link "Documentation":
+        - /url: /docs
+    - listitem:
+      - link "Report Issues":
+        - /url: https://github.com/gregmeyer/build-your-app-w-cm-kit/issues
+    - listitem:
+      - link "GitHub Repository":
+        - /url: https://github.com/gregmeyer/build-your-app-w-cm-kit
+  - text: © 2025 Greg Meyer. All rights reserved. Built with
+  - link "CM Kit":
+    - /url: https://github.com/gregmeyer/build-your-app-w-cm-kit
+  - text: •
+  - link "MIT License":
+    - /url: /LICENSE
+- alert
+- button "Open Next.js Dev Tools":
+  - img
+```

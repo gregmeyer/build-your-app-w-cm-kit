@@ -15,6 +15,7 @@ To make this system actually work, you need to create the core CLI infrastructur
 ## 1. Main CLI Entry Point (`utils/cli.js`)
 
 ```javascript
+`utils/cli.js`
 #!/usr/bin/env node
 
 const path = require('path');
@@ -41,6 +42,7 @@ const commands = {
   'list-stories': require('./commands/list-stories'),
   'list-issues': require('./commands/list-issues'),
   'validate-structure': require('./commands/validate-structure'),
+  'validate-docs': require('./commands/validate-docs'),
   'pick-ticket': require('./commands/pick-ticket'),
   'pick-story': require('./commands/pick-story'),
   'update-ticket': require('./commands/update-ticket'),
@@ -112,6 +114,7 @@ main().catch(console.error);
 ## 2. Logger Utility (`utils/lib/logger.js`)
 
 ```javascript
+`utils/lib/logger.js`
 const fs = require('fs');
 const path = require('path');
 
@@ -180,6 +183,7 @@ module.exports = Logger;
 ## 3. Session Start Command (`utils/commands/session-start.js`)
 
 ```javascript
+`utils/commands/session-start.js`
 const fs = require('fs');
 const path = require('path');
 const Logger = require('../lib/logger');
@@ -367,6 +371,7 @@ module.exports = {
 ## 4. Session Wrap-up Command (`utils/commands/session-wrapup.js`)
 
 ```javascript
+`utils/commands/session-wrapup.js`
 #!/usr/bin/env node
 
 const fs = require('fs');
@@ -582,7 +587,85 @@ function checkGitStatus() {
   }
 }
 
-function generateSessionReport(stats, testSuccess, gitStatus) {
+function validateDocumentation() {
+  console.log('\n📋 Validating Documentation Consistency...');
+  const issues = [];
+  
+  // Check README.md
+  if (!fs.existsSync('README.md')) {
+    issues.push('README.md file is missing');
+  } else {
+    const readmeContent = fs.readFileSync('README.md', 'utf-8');
+    if (!readmeContent.includes('Deprecation Warning Suppression')) {
+      issues.push('README.md missing deprecation warning suppression documentation');
+    }
+    if (!readmeContent.includes('Automated Testing & CI/CD')) {
+      issues.push('README.md missing testing infrastructure documentation');
+    }
+  }
+  
+  // Check getting-started.md
+  if (!fs.existsSync('getting-started.md')) {
+    issues.push('getting-started.md file is missing');
+  } else {
+    const gettingStartedContent = fs.readFileSync('getting-started.md', 'utf-8');
+    if (!gettingStartedContent.includes('Deprecation Warning Suppression')) {
+      issues.push('getting-started.md missing deprecation warning suppression documentation');
+    }
+    if (!gettingStartedContent.includes('npm test') || !gettingStartedContent.includes('npm run test:e2e')) {
+      issues.push('getting-started.md missing test command documentation');
+    }
+  }
+  
+  // Check automation setup
+  if (!fs.existsSync('automation/setup-automated.js')) {
+    issues.push('automation/setup-automated.js file is missing');
+  } else {
+    const setupContent = fs.readFileSync('automation/setup-automated.js', 'utf-8');
+    if (!setupContent.includes('jest@29.7.0')) {
+      issues.push('setup-automated.js missing Jest version specification');
+    }
+    if (!setupContent.includes('updatePackageJsonOverrides')) {
+      issues.push('setup-automated.js missing package.json overrides function');
+    }
+  }
+  
+  // Check CLI implementation
+  if (!fs.existsSync('automation/cli-implementation.md')) {
+    issues.push('automation/cli-implementation.md file is missing');
+  } else {
+    const cliContent = fs.readFileSync('automation/cli-implementation.md', 'utf-8');
+    if (!cliContent.includes('validate-docs')) {
+      issues.push('cli-implementation.md missing validate-docs command');
+    }
+  }
+  
+  // Check configuration files
+  if (!fs.existsSync('.npmrc')) {
+    issues.push('Missing .npmrc file for deprecation warning suppression');
+  }
+  
+  if (!fs.existsSync('jest.config.js')) {
+    issues.push('Missing jest.config.js file');
+  }
+  
+  if (!fs.existsSync('playwright.config.js')) {
+    issues.push('Missing playwright.config.js file');
+  }
+  
+  const valid = issues.length === 0;
+  
+  if (valid) {
+    console.log('✅ Documentation is consistent and up to date');
+  } else {
+    console.log('❌ Documentation issues found:');
+    issues.forEach(issue => console.log(`   ⚠️  ${issue}`));
+  }
+  
+  return { valid, issues };
+}
+
+function generateSessionReport(stats, testSuccess, gitStatus, docsValidation) {
   console.log('\n' + '='.repeat(60));
   console.log('🎯 SESSION WRAP-UP REPORT');
   console.log('='.repeat(60));
@@ -606,6 +689,15 @@ function generateSessionReport(stats, testSuccess, gitStatus) {
     console.log('   ✅ Working directory clean');
   } else {
     console.log(`   📝 ${gitStatus.total} files changed (${gitStatus.modified} modified, ${gitStatus.added} added)`);
+  }
+  
+  // Documentation Status
+  console.log('\n📋 Documentation Status:');
+  if (docsValidation.valid) {
+    console.log('   ✅ Documentation is consistent and up to date');
+  } else {
+    console.log('   ❌ Documentation issues found');
+    docsValidation.issues.forEach(issue => console.log(`   ⚠️  ${issue}`));
   }
   
   // Next Steps
@@ -651,14 +743,17 @@ function main() {
   // Check git status
   const gitStatus = checkGitStatus();
   
+  // Validate documentation consistency
+  const docsValidation = validateDocumentation();
+  
   // Generate comprehensive report
-  generateSessionReport(stats, testSuccess, gitStatus);
+  generateSessionReport(stats, testSuccess, gitStatus, docsValidation);
   
   // Create session log file
   const logPath = createSessionLog();
   
   // Final status
-  const overallSuccess = contextUpdated && testSuccess;
+  const overallSuccess = contextUpdated && testSuccess && docsValidation.valid;
   console.log(`\n🎉 Session wrap-up ${overallSuccess ? 'completed successfully' : 'completed with issues'}`);
   console.log(`📝 Session log saved to: ${logPath}`);
   
@@ -677,6 +772,7 @@ module.exports = { run: (options, logger) => main() };
 ## 5. Status Report Command (`utils/commands/status-report.js`)
 
 ```javascript
+`utils/commands/status-report.js`
 const fs = require('fs');
 const path = require('path');
 
@@ -801,6 +897,7 @@ module.exports = {
 ## 6. List Tickets Command (`utils/commands/list-tickets.js`)
 
 ```javascript
+`utils/commands/list-tickets.js`
 const fs = require('fs');
 const path = require('path');
 
@@ -856,56 +953,278 @@ module.exports = {
 };
 ```
 
-## Session Logging Features
+## 7. Validate Documentation Command (`utils/commands/validate-docs.js`)
 
-### Automatic Session Logs
-The `session-wrapup` command now automatically creates detailed markdown logs of each development session:
+```javascript
+`utils/commands/validate-docs.js`
+const fs = require('fs');
+const path = require('path');
 
-- **Log Location**: `logs/session-complete-log-YYYY-MM-DD-XX.md`
-- **Auto-numbering**: Sessions are numbered sequentially per day (01, 02, 03, etc.)
-- **Markdown Format**: Professional markdown formatting with sections and code blocks
-- **Complete Output**: Captures all console output during session wrap-up
-- **Session Metadata**: Includes date, session number, duration, and status
+const DOCS_FILES = [
+  'README.md',
+  'getting-started.md',
+  'docs/README.md',
+  'docs/prd/README.md'
+];
 
-### Log File Structure
-```markdown
-# CM Kit Platform - Session Complete Log
+const SETUP_FILES = [
+  'automation/setup-automated.js',
+  'automation/cli-implementation.md'
+];
 
-## Session Information
-- **Date**: 2025-06-22T23:54:43.420Z
-- **Session Number**: 2
-- **Filename**: `session-complete-log-2025-06-22-02.md`
-- **Duration**: 29 output lines
+function checkFileExists(filePath) {
+  return fs.existsSync(filePath);
+}
 
-## Session Output
-```bash
-[Complete console output captured during session]
-```
+function validateReadme() {
+  console.log('\n📖 Validating README.md...');
+  const issues = [];
+  
+  if (!checkFileExists('README.md')) {
+    issues.push('README.md file is missing');
+    return { valid: false, issues };
+  }
+  
+  const content = fs.readFileSync('README.md', 'utf-8');
+  
+  // Check for key sections
+  const requiredSections = [
+    'Automated Testing & CI/CD',
+    'Development Tools',
+    'Ready-to-Use Features'
+  ];
+  
+  requiredSections.forEach(section => {
+    if (!content.includes(section)) {
+      issues.push(`Missing section: ${section}`);
+    }
+  });
+  
+  // Check for deprecation warning mention
+  if (!content.includes('Deprecation Warning Suppression')) {
+    issues.push('Missing deprecation warning suppression documentation');
+  }
+  
+  // Check for testing infrastructure mention
+  if (!content.includes('Jest') || !content.includes('Playwright')) {
+    issues.push('Missing testing infrastructure documentation');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
 
-## Session Summary
-### Key Metrics
-- **Session completed at**: 2025-06-22T23:54:43.420Z
-- **Log file**: `session-complete-log-2025-06-22-02.md`
-- **Total output lines**: 29
-- **Session number**: 2
+function validateGettingStarted() {
+  console.log('\n🚀 Validating getting-started.md...');
+  const issues = [];
+  
+  if (!checkFileExists('getting-started.md')) {
+    issues.push('getting-started.md file is missing');
+    return { valid: false, issues };
+  }
+  
+  const content = fs.readFileSync('getting-started.md', 'utf-8');
+  
+  // Check for key sections
+  const requiredSections = [
+    'Automated Testing & CI/CD',
+    'Development Environment Setup',
+    'Next Steps'
+  ];
+  
+  requiredSections.forEach(section => {
+    if (!content.includes(section)) {
+      issues.push(`Missing section: ${section}`);
+    }
+  });
+  
+  // Check for deprecation warning mention
+  if (!content.includes('Deprecation Warning Suppression')) {
+    issues.push('Missing deprecation warning suppression documentation');
+  }
+  
+  // Check for test commands
+  if (!content.includes('npm test') || !content.includes('npm run test:e2e')) {
+    issues.push('Missing test command documentation');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
 
-### Session Status
-- ✅ Session wrap-up completed successfully
-- 📝 Log file created and saved
-- 🔄 Agent context updated
-- 🧪 Tests executed
-- 📊 Git status checked
+function validateDocsReadme() {
+  console.log('\n📚 Validating docs/README.md...');
+  const issues = [];
+  
+  if (!checkFileExists('docs/README.md')) {
+    issues.push('docs/README.md file is missing');
+    return { valid: false, issues };
+  }
+  
+  const content = fs.readFileSync('docs/README.md', 'utf-8');
+  
+  // Check for testing mention
+  if (!content.includes('testing') && !content.includes('Testing')) {
+    issues.push('Missing testing infrastructure reference');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
 
----
-*Generated automatically by CM Kit Platform CLI*
-```
+function validateSetupAutomated() {
+  console.log('\n🔧 Validating automation/setup-automated.js...');
+  const issues = [];
+  
+  if (!checkFileExists('automation/setup-automated.js')) {
+    issues.push('automation/setup-automated.js file is missing');
+    return { valid: false, issues };
+  }
+  
+  const content = fs.readFileSync('automation/setup-automated.js', 'utf-8');
+  
+  // Check for Jest version specification
+  if (!content.includes('jest@29.7.0')) {
+    issues.push('Missing Jest version specification (should be 29.7.0)');
+  }
+  
+  // Check for package.json overrides
+  if (!content.includes('updatePackageJsonOverrides')) {
+    issues.push('Missing package.json overrides function');
+  }
+  
+  // Check for .npmrc creation
+  if (!content.includes('.npmrc') || !content.includes('loglevel=error')) {
+    issues.push('Missing .npmrc creation with loglevel=error');
+  }
+  
+  // Check for deprecation warning testing
+  if (!content.includes('Testing deprecation warning suppression')) {
+    issues.push('Missing deprecation warning suppression testing');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
 
-### Benefits
-- **Audit Trail**: Complete history of all development sessions
-- **Debugging**: Easy to review what happened during problematic sessions
-- **Progress Tracking**: Visual record of project progress over time
-- **Documentation**: Automatic documentation of development activities
-- **Professional**: Clean, readable markdown format for easy review
+function validateCLIImplementation() {
+  console.log('\n⚙️  Validating automation/cli-implementation.md...');
+  const issues = [];
+  
+  if (!checkFileExists('automation/cli-implementation.md')) {
+    issues.push('automation/cli-implementation.md file is missing');
+    return { valid: false, issues };
+  }
+  
+  const content = fs.readFileSync('automation/cli-implementation.md', 'utf-8');
+  
+  // Check for validate-docs command
+  if (!content.includes('validate-docs')) {
+    issues.push('Missing validate-docs command in CLI implementation');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
+
+function checkConsistency() {
+  console.log('\n🔍 Checking documentation consistency...');
+  const issues = [];
+  
+  // Check if package.json has the right scripts
+  if (checkFileExists('package.json')) {
+    const packageContent = fs.readFileSync('package.json', 'utf-8');
+    const packageJson = JSON.parse(packageContent);
+    
+    const requiredScripts = [
+      'test',
+      'test:watch',
+      'test:coverage',
+      'test:e2e',
+      'test:all'
+    ];
+    
+    requiredScripts.forEach(script => {
+      if (!packageJson.scripts || !packageJson.scripts[script]) {
+        issues.push(`Missing npm script: ${script}`);
+      }
+    });
+    
+    // Check for overrides
+    if (!packageJson.overrides) {
+      issues.push('Missing package.json overrides for deprecation warnings');
+    }
+  }
+  
+  // Check if .npmrc exists
+  if (!checkFileExists('.npmrc')) {
+    issues.push('Missing .npmrc file for deprecation warning suppression');
+  }
+  
+  // Check if Jest config exists
+  if (!checkFileExists('jest.config.js')) {
+    issues.push('Missing jest.config.js file');
+  }
+  
+  // Check if Playwright config exists
+  if (!checkFileExists('playwright.config.js')) {
+    issues.push('Missing playwright.config.js file');
+  }
+  
+  return { valid: issues.length === 0, issues };
+}
+
+module.exports = {
+  description: 'Validate documentation consistency and completeness',
+  run: async (options) => {
+    console.log('📋 Documentation Validation Report');
+    console.log('============================================================');
+    
+    const results = {
+      readme: validateReadme(),
+      gettingStarted: validateGettingStarted(),
+      docsReadme: validateDocsReadme(),
+      setupAutomated: validateSetupAutomated(),
+      cliImplementation: validateCLIImplementation(),
+      consistency: checkConsistency()
+    };
+    
+    let totalIssues = 0;
+    let allValid = true;
+    
+    Object.entries(results).forEach(([name, result]) => {
+      if (!result.valid) {
+        allValid = false;
+        totalIssues += result.issues.length;
+      }
+    });
+    
+    console.log('\n📊 Validation Results:');
+    console.log('============================================================');
+    
+    Object.entries(results).forEach(([name, result]) => {
+      const status = result.valid ? '✅ PASS' : '❌ FAIL';
+      const nameFormatted = name.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+      console.log(`${status} ${nameFormatted}`);
+      
+      if (!result.valid && result.issues.length > 0) {
+        result.issues.forEach(issue => {
+          console.log(`   ⚠️  ${issue}`);
+        });
+      }
+    });
+    
+    console.log('\n============================================================');
+    console.log(`📈 Summary: ${totalIssues} issues found`);
+    
+    if (allValid) {
+      console.log('🎉 All documentation is consistent and up to date!');
+    } else {
+      console.log('🔧 Please fix the issues above to ensure documentation consistency.');
+      console.log('\n💡 Tips:');
+      console.log('   • Run this command after making changes to documentation');
+      console.log('   • Check that all new features are documented');
+      console.log('   • Ensure automation scripts match documented behavior');
+    }
+    
+    console.log('============================================================');
+  }
+};
 
 ---
 
